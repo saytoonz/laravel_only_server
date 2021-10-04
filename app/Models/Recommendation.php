@@ -24,4 +24,8 @@ class Recommendation extends Model
         'date_used',
         'active'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'in_use_recommendation', 'id');
+    }
 }

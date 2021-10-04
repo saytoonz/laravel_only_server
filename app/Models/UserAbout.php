@@ -24,4 +24,7 @@ class UserAbout extends Model
         'fun_question_two',
         'fun_answer_two',
     ];
+    public function user(){
+        return $this->belongsTo(User::class, 'id', 'uid');
+    }
 }

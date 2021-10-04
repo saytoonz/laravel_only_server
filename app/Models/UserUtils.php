@@ -16,4 +16,9 @@ class UserUtils extends Model
         'not_interested',
         'likers'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'uid', 'id');
+    }
 }

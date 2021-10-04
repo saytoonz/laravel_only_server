@@ -16,4 +16,8 @@ class Verified extends Model
         'last_updated',
         'date_verified',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id', 'uid');
+    }
 }

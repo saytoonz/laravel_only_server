@@ -75,9 +75,17 @@ class UserAboutController extends Controller
      */
     public function update(Request $request, $uid)
     {
-        $userAbout = UserAbout::where('uid',$uid)->get()->first();
-        $userAbout->update($request->all());
-        return $userAbout;
+        try {
+            $userAbout = UserAbout::where('uid',$uid)->get()->first();
+            $userAbout->update($request->all());
+            $response["error"] = FALSE;
+            $response["msg"] = "done";
+            $response['user_about'] = $userAbout;
+        } catch (\Exception $e) {
+            $response["error"] = TRUE;
+            $response["msg"] = "An unknown error occurred, please try again.";
+        }
+        return $response;
     }
 
     /**

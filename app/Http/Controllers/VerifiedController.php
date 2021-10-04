@@ -69,9 +69,20 @@ class VerifiedController extends Controller
      */
     public function update(Request $request, $uid)
     {
-        $userAbout = Verified::where('uid',$uid)->get()->first();
-        $userAbout->update($request->all());
-        return $userAbout;
+        $response = array("error" => FALSE);
+
+        try{
+        $verified = Verified::where('uid',$uid)->get()->first();
+        $verified->update($request->all());
+            $response["error"] = FALSE;
+            $response["msg"] = "done";
+            $response['verified'] = $verified;
+        }catch(\Exception $e){
+            $response["error"] = TRUE;
+            $response["msg"] = "An error occurred, please try again.";
+        }
+
+        return json_encode($response);
     }
 
     /**

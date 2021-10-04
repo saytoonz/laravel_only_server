@@ -39,12 +39,14 @@ class NotificationController extends Controller
             'mail_friend_recording',
             'mail_only_news',
         ]);
-        $userNotif = Notification::where('uid', $uid)->updateOrCreate($request->all());
-        if ($userNotif) {
+
+        try {
+            $userNotif = Notification::where('uid', $uid)->updateOrCreate($request->all());
+            $userNotif->update($request->all());
             $response["error"] = FALSE;
             $response["msg"] = "done";
             $response['notifications'] = $userNotif;
-        } else {
+        } catch (\Exception $e) {
             $response["error"] = TRUE;
             $response["msg"] = "An unknown error occurred, please try again.";
         }
@@ -60,7 +62,7 @@ class NotificationController extends Controller
      */
     public function show($uid)
     {
-        return Notification::where('uid',$uid)->get()->first();
+        return Notification::where('uid', $uid)->get()->first();
     }
 
     /**
@@ -72,9 +74,24 @@ class NotificationController extends Controller
      */
     public function update(Request $request, $uid)
     {
-        $userNotif = Notification::where('uid',$uid)->get()->first();
-        $userNotif->update($request->all());
-        return $userNotif;
+        $response = array("error" => FALSE);
+
+        try {
+            $userNotif = Notification::where('uid', $uid)->get()->first();
+            $userNotif->update($request->all());
+            $response["error"] = FALSE;
+            $response["msg"] = "done";
+            $response['notifications'] = $userNotif;
+        } catch (\Exception $e) {
+            $response["error"] = TRUE;
+            $response["msg"] = "An error occurred, please try again.";
+        }
+
+
+
+
+
+        return $response;
     }
 
     /**

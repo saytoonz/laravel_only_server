@@ -69,9 +69,17 @@ class PremiumController extends Controller
      */
     public function update(Request $request, $uid)
     {
-        $premium = Premium::where('uid', $uid)->get()->first();
-        $premium->update($request->all());
-        return $premium;
+        try {
+            $premium = Premium::where('uid', $uid)->get()->first();
+            $premium->update($request->all());
+            $response["error"] = False;
+            $response["msg"] = "done";
+            $response['premium'] = $premium;
+        } catch (\Exception $e) {
+            $response["error"] = TRUE;
+            $response["msg"] = "An unknown error occurred, please try again.";
+        }
+        return json_encode($response);
     }
 
     /**

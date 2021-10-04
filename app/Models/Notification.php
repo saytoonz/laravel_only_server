@@ -19,4 +19,8 @@ class Notification extends Model
         'mail_friend_recording',
         'mail_only_news',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id', 'uid');
+    }
 }

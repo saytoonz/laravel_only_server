@@ -11,7 +11,7 @@ class NewLoginController extends Controller
      public function newLogin(Request $request)
     {
         $response = array("error" => FALSE);
-
+        try{
         $user = User::where('fb_uid', $request->fuid)->get()->first();
         if($user){
             //Check if user has set up his/her account
@@ -32,6 +32,11 @@ class NewLoginController extends Controller
             }
         }
 
+    }catch(\Exception $e){
+
+        $response["error"] = TRUE;
+        $response["msg"] = "An unknown error occurred, please try again.";
+    }
         return json_encode($response);
     }
 }

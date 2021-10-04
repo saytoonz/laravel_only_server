@@ -69,9 +69,20 @@ class UserMediaController extends Controller
      */
     public function update(Request $request, $uid)
     {
+        $response = array("error" => FALSE);
+
         $userMedia = UserMedia::where('uid',$uid)->get()->first();
         $userMedia->update($request->all());
         return $userMedia;
+        if($userMedia != null){
+            $response["error"] = FALSE;
+            $response["msg"] = "done";
+            $response['user_media'] = $userMedia;
+        }else{
+            $response["error"] = TRUE;
+            $response["msg"] = "An error occurred, please try again.";
+        }
+        return json_encode($response);
     }
 
     /**

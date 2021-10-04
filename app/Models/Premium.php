@@ -20,4 +20,8 @@ class Premium extends Model
         'city',
         'boost',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id', 'uid');
+    }
 }
