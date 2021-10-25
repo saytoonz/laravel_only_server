@@ -7,58 +7,63 @@ use Illuminate\Http\Request;
 
 class UserLikesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         return UserLikes::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'from' => 'required',
+            'to' => 'required',
+            'isliked' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'msg' => 'Required parameter missing.',
+            ]);
+        }
+
+        try {
+            $userLike = UserLikes::updateOrCreate(
+                [
+                    'to'=> $request->to,
+                    'from'=> $request->from,
+                ],
+                [
+                    'to'=> $request->to,
+                    'from'=> $request->from,
+                    'isliked'=> $request->isliked,
+                ]
+            );
+            if ($userLike) {
+                $userLikedMe = UserLikes::where('from', $request->to)->where('to', $request->from)->first();
+                $response["error"] = FALSE;
+                $response["msg"] = "done";
+                $response['user_my_like'] = $userLike;
+                $response['user_liked_me'] = $userLikedMe;
+            } else {
+                $response["error"] = TRUE;
+                $response["msg"] = "An unknown error occurred, please try again.";
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            $response["error"] = TRUE;
+            $response["msg"] = "An unknown error occurred, please try again.";
+        }
+
+        return json_encode($response);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return UserLikes::find($id);
     }
 }

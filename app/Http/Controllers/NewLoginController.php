@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppUser;
 use App\Models\Recommendation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,12 +13,12 @@ class NewLoginController extends Controller
     {
         $response = array("error" => FALSE);
         try{
-        $user = User::where('fb_uid', $request->fuid)->get()->first();
+        $user = AppUser::where('fb_uid', $request->fuid)->get()->first();
         if($user){
             //Check if user has set up his/her account
-            $response["user"]=$user;
             $response["error"] = FALSE;
             $response["msg"] = "user";
+            $response["user"]=$user;
 
         }else{
             $recommended = Recommendation::where('friend_phone', $request->phone)->get()->first();

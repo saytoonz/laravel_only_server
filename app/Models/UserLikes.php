@@ -12,7 +12,7 @@ class UserLikes extends Model
     protected $fillable = [
         'from',
         'to',
-        'islike'
+        'isliked'
     ];
 
 

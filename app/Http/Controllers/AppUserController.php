@@ -25,7 +25,7 @@ class AppUserController extends Controller
 
     public function getPotentialUsers($uid)
     {
-        return UserResource::collection(AppUser::where('id', '!=', $uid)->inRandomOrder()->paginate());
+        return UserResource::collection(AppUser::where('id', '!=', $uid)->inRandomOrder()->paginate(2));
     }
 
 

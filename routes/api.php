@@ -7,9 +7,11 @@ use App\Http\Controllers\AppUserController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserAboutController;
+use App\Http\Controllers\UserLikesController;
 use App\Http\Controllers\UserMediaController;
 use App\Http\Controllers\UserUtilsController;
 use App\Http\Controllers\VerifiedController;
+use App\Models\UserLikes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +45,11 @@ Route::post('user-about/{uid}', [UserAboutController::class, 'store']);
 Route::get('user-about/{uid}', [UserAboutController::class, 'show']);
 Route::put('update-user-about/{uid}', [UserAboutController::class, 'update']);
 Route::delete('user-about/{id}', [UserAboutController::class, 'destroy']);
+
+
+//User Likes
+Route::get('show-user-like/{id}', [UserLikesController::class, 'show']);
+Route::post('add-user-likes', [UserLikesController::class, 'store']);
 
 
 //User Notifications Routes
