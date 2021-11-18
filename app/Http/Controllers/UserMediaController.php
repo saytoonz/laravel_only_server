@@ -73,7 +73,6 @@ class UserMediaController extends Controller
 
         $userMedia = UserMedia::where('uid',$uid)->get()->first();
         $userMedia->update($request->all());
-        return $userMedia;
         if($userMedia != null){
             $response["error"] = FALSE;
             $response["msg"] = "done";

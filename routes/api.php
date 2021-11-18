@@ -30,8 +30,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('users', [AppUserController::class, 'index']);
 Route::post('new-user-account-setup', [AppUserController::class, 'store']);
 Route::get('users/{id}', [AppUserController::class, 'show']);
-Route::put('update-users/{id}', [AppUserController::class, 'update']);
-Route::put('update-users-with-fuid/{fuid}', [AppUserController::class, 'updateWithFuid']);
+Route::post('update-users/{id}', [AppUserController::class, 'update']);
+Route::post('update-users-with-fuid/{fuid}', [AppUserController::class, 'updateWithFuid']);
 Route::post('update-user-with-column-value', [AppUserController::class, 'updateWithColumnPassed']);
 Route::delete('users/{id}', [AppUserController::class, 'destroy']);
 Route::post('get-user', [AppUserController::class, 'getUser']);
@@ -43,7 +43,7 @@ Route::get('get-all-user', [AppUserController::class, 'index']);
 Route::get('user-about', [UserAboutController::class, 'index']);
 Route::post('user-about/{uid}', [UserAboutController::class, 'store']);
 Route::get('user-about/{uid}', [UserAboutController::class, 'show']);
-Route::put('update-user-about/{uid}', [UserAboutController::class, 'update']);
+Route::post('update-user-about/{uid}', [UserAboutController::class, 'update']);
 Route::delete('user-about/{id}', [UserAboutController::class, 'destroy']);
 
 
@@ -56,42 +56,42 @@ Route::post('add-user-likes', [UserLikesController::class, 'store']);
 Route::get('user-notif', [NotificationController::class, 'index']);
 Route::post('user-notif/{uid}', [NotificationController::class, 'store']);
 Route::get('user-notif/{uid}', [NotificationController::class, 'show']);
-Route::put('update-user-notif/{uid}', [NotificationController::class, 'update']);
+Route::post('update-user-notif/{uid}', [NotificationController::class, 'update']);
 Route::delete('user-notif/{id}', [NotificationController::class, 'destroy']);
 
 //User Premium Routes
 Route::get('user-premium', [PremiumController::class, 'index']);
 Route::post('user-premium/{uid}', [PremiumController::class, 'store']);
 Route::get('user-premium/{uid}', [PremiumController::class, 'show']);
-Route::put('update-user-premium/{uid}', [PremiumController::class, 'update']);
+Route::post('update-user-premium/{uid}', [PremiumController::class, 'update']);
 Route::delete('user-premium/{id}', [PremiumController::class, 'destroy']);
 
 //User User Utils Routes
 Route::get('user-utils', [UserUtilsController::class, 'index']);
 Route::post('user-utils/{uid}', [UserUtilsController::class, 'store']);
 Route::get('user-utils/{uid}', [UserUtilsController::class, 'show']);
-Route::put('user-utils/{uid}', [UserUtilsController::class, 'update']);
+Route::post('user-utils/{uid}', [UserUtilsController::class, 'update']);
 Route::delete('user-utils/{id}', [UserUtilsController::class, 'destroy']);
 
 //User User Verified Routes
 Route::get('verified', [VerifiedController::class, 'index']);
 Route::post('verified/{uid}', [VerifiedController::class, 'store']);
 Route::get('verified/{uid}', [VerifiedController::class, 'show']);
-Route::put('update-verified/{uid}', [VerifiedController::class, 'update']);
+Route::post('update-verified/{uid}', [VerifiedController::class, 'update']);
 Route::delete('verified/{id}', [VerifiedController::class, 'destroy']);
 
 //User User Media Routes
 Route::get('user-media', [UserMediaController::class, 'index']);
 Route::post('user-media/{uid}', [UserMediaController::class, 'store']);
 Route::get('user-media/{uid}', [UserMediaController::class, 'show']);
-Route::put('update-user-media/{uid}', [UserMediaController::class, 'update']);
+Route::post('update-user-media/{uid}', [UserMediaController::class, 'update']);
 Route::delete('user-media/{id}', [UserMediaController::class, 'destroy']);
 
 //Recommendation Routes
 Route::get('recs', [RecommendationController::class, 'index']);
 Route::post('recs', [RecommendationController::class, 'store']);
 Route::get('recs/{id}', [RecommendationController::class, 'show']);
-Route::put('recs/{id}', [RecommendationController::class, 'update']);
+Route::post('update-recs/{id}', [RecommendationController::class, 'update']);
 Route::delete('recs/{id}', [RecommendationController::class, 'destroy']);
 Route::post('reject-recommendation', [RecommendationController::class, 'rejectARecommendation']);
 Route::post('get-rec-with-smscode', [RecommendationController::class, 'getRecBySMSCode']);
