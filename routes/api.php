@@ -4,6 +4,8 @@ use App\Http\Controllers\NewLoginController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\AppUserController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserAboutController;
@@ -89,12 +91,18 @@ Route::delete('user-media/{id}', [UserMediaController::class, 'destroy']);
 
 //Recommendation Routes
 Route::get('recs', [RecommendationController::class, 'index']);
-Route::post('recs', [RecommendationController::class, 'store']);
+Route::post('create-rec', [RecommendationController::class, 'store']);
 Route::get('recs/{id}', [RecommendationController::class, 'show']);
 Route::post('update-recs/{id}', [RecommendationController::class, 'update']);
 Route::delete('recs/{id}', [RecommendationController::class, 'destroy']);
 Route::post('reject-recommendation', [RecommendationController::class, 'rejectARecommendation']);
 Route::post('get-rec-with-smscode', [RecommendationController::class, 'getRecBySMSCode']);
+
+//Matched
+Route::get('get-matches/{uid}', [MatchesController::class, 'getMatches']);
+
+//Chat and Chat Lists
+Route::post('create-chat',[ ChatController::class, 'store']);
 
 //New Login route
 Route::post('check-and-login', [NewLoginController::class, 'newLogin']);

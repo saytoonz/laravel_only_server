@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppUser;
 use App\Models\Recommendation;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class RecommendationController extends Controller
 {
@@ -43,7 +44,7 @@ class RecommendationController extends Controller
             'recording_path' => 'required',
         ]);
 
-        if (User::where('phone', $request->friend_phone)->get()->first()) {
+        if (AppUser::where('phone', $request->friend_phone)->get()->first()) {
             $response["error"] = TRUE;
             $response["msg"] = "Sorry, this user is already active on  ONLY!.";
             return json_encode($response);
@@ -62,6 +63,7 @@ class RecommendationController extends Controller
             ->get()
             ->first();
         if ($dbResponse) {
+            $sms_code = $dbResponse->sms_code;
             $dbResponse->update($request->all());
             $dbResponse->update([
                 'active' => 'yes',
@@ -86,32 +88,23 @@ class RecommendationController extends Controller
 
         $response["data"] = $dbResponse;
 
+
         //Send Sms here....
         if ($dbResponse) {
-            $smsMessage = "You are a trusted friend!
+            $smsMessage = "You are a trusted friend $request->friend_name!
 
-                    Your friend $request->recommender_fname $request->recommender_sname has recommended you to join the app ONLY!, where only users that have been recommended by friends are allowed to join. That way we get the best community of users! Or as we like to say - only good people. Kindly follow the link below to join.
+Your friend $request->recommender_fname $request->recommender_sname has recommended you to join the app ONLY!, where only users that have been recommended by friends are allowed to join. That way we get the best community of users! Or as we like to say - only good people. Kindly follow the link below to join.
 
-                   Kindly register with the code: $sms_code
+Kindly register with the code: $sms_code
 
-                    App Store: linklinklink
-                    Google Play: linklinklink";
+App Store: https://stackoverflow.com
+Google Play: https://stackoverflow.com";
 
-            $url = "https://sms.arkesel.com/sms/api?action=send-sms&api_key=OmpwSmg0VXhUakpxRnN4dzU=&to=$request->friend_phone&from=ONLY!&sms=$smsMessage";
-
-            // create a new cURL resource
-            // $ch = curl_init();
-            // // set URL and other appropriate options
-            // curl_setopt($ch, CURLOPT_URL, $url);
-            // curl_setopt($ch, CURLOPT_HEADER, 0);
-            // // grab URL and pass it to the browser
-            // curl_exec($ch);
-            // // close cURL resource, and free up system resources
-            // curl_close($ch);
 
 
             $response["error"] = FALSE;
-            $response["msg"] = "Recommendation created successfully...$sms_code";
+            $response["msg"] = "Recommendation created successfully.";
+            $response["smsResp"] = $this->sendSMS($request->friend_phone,  $smsMessage);
         } else {
             $response["error"] = TRUE;
             //Use message from the top
@@ -121,12 +114,7 @@ class RecommendationController extends Controller
         return json_encode($response);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
 
@@ -144,13 +132,8 @@ class RecommendationController extends Controller
         return json_encode($response);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function update(Request $request, $id)
     {
         $rec = Recommendation::find($id);
@@ -197,6 +180,15 @@ class RecommendationController extends Controller
             ->where('friend_phone', $request->phone)
             ->where('active', 'yes')->get()->first();
         if ($recommended != null) {
+
+            $smsMessage = "Oh no!
+
+Your friend $recommended->friend_name did not approve of your recommendation on ONLY! You may discussed with him/her what he/she was not comfortable with so you can create a new profile for her again, if you want to.
+
+Thank you,
+
+The ONLY! Team";
+
             $last_update =
                 $recommended->update([
                     'active' => 'rej',
@@ -204,6 +196,7 @@ class RecommendationController extends Controller
                 ]);
             $response["error"] = FALSE;
             $response["msg"] = "done";
+            $response["smsResp"] = $this->sendSMS($recommended->recommender_phone,  $smsMessage);
         } else {
             $response["error"] = TRUE;
             $response["msg"] = "Sms code has been revoked or does not exist!";
@@ -216,7 +209,6 @@ class RecommendationController extends Controller
     public function getRecBySMSCode(Request $request)
     {
         $response = array("error" => FALSE);
-
         $request->validate([
             'smscode' => 'required',
             'phone' => 'required',
@@ -225,15 +217,34 @@ class RecommendationController extends Controller
         $recommended = Recommendation::where('sms_code', $request->smscode)
             ->where('friend_phone', $request->phone)
             ->where('active', 'yes')->get()->first();
-            if($recommended != null){
-                $response["error"] = FALSE;
-                $response["msg"] = "recommended";
-              $response["recommended"] = $recommended;
-            }else{
-                $response["error"] = TRUE;
-              $response["msg"] = "Sms code has been revoked or does not exist!";
-            }
+        if ($recommended != null) {
+            $response["error"] = FALSE;
+            $response["msg"] = "recommended";
+            $response["recommended"] = $recommended;
+        } else {
+            $response["error"] = TRUE;
+            $response["msg"] = "Sms code has been revoked or does not exist!";
+        }
 
-            return json_encode($response);
+        return json_encode($response);
+    }
+
+
+    public function sendSMS($phone, $message)
+    {
+
+        $apiURL = "https://apiv2.mycsms.com";
+        $postInput = [
+            'apiKey' => 'cSMS76b8512f69953562-d7c386f5bdb710ee',
+            'phone' => [$phone],
+            'sender' => 'Only',
+            'message' => $message,
+        ];
+
+        $headers = [];
+        $resp = Http::withHeaders($headers)->post($apiURL, $postInput);
+        // $statusCode = $response->status();
+        $responseBody = json_decode($resp->getBody(), true);
+        return $responseBody;
     }
 }

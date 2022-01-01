@@ -38,7 +38,6 @@ class AppUserController extends Controller
         $request->validate([
             'fb_uid' => 'required',
             'phone' => 'required',
-            'email' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'date_of_birth' => 'required',
@@ -52,17 +51,17 @@ class AppUserController extends Controller
 
         if (AppUser::where('fb_uid', $request->fb_uid)->get()->first()) {
             $response["error"] = TRUE;
-            $response["msg"] = "AppUser already exist!";
+            $response["msg"] = "User already exist!";
             return json_encode($response);
         }
 
         if (AppUser::where('phone', $request->phone)->get()->first()) {
             $response["error"] = TRUE;
-            $response["msg"] = "AppUser already exist with this phone number!";
+            $response["msg"] = "User already exist with this phone number!";
             return json_encode($response);
         }
 
-        if (AppUser::where('email', $request->email)->get()->first()) {
+        if (AppUser::where('email', $request->email)->get()->first() && $request->email != NULL) {
             $response["error"] = TRUE;
             $response["msg"] = "Email has already been!";
             return json_encode($response);
@@ -87,6 +86,8 @@ class AppUserController extends Controller
             'current_address' => '',
         ]);
         if ($user) {
+
+            $response["msg"] = "User created successfully";
             $uid = $user['id'];
             $recId = $user['in_use_recommendation'];
             $rec = Recommendation::find($recId);
@@ -94,6 +95,7 @@ class AppUserController extends Controller
                 $rec->update([
                     'used_by' => $uid,
                     'date_used' => date("F j, Y, g:i a"),
+                    'active' => 'used',
                 ]);
                 $response["error"] = FALSE;
                 $response["user"] = $user;

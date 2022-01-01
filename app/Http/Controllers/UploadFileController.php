@@ -24,10 +24,11 @@ class UploadFileController extends Controller
         }
 
         if ($request->file != null) {
-            $request->file('file')->storeAs('public/user_data/'.$request->dir, $request->fileName . '.' . $request->file('file')->extension());
+            $ext = $request->file('file')->extension() == "m4a" ? "mp3": $request->file('file')->extension();
+            $request->file('file')->storeAs('public/user_data/'.$request->dir, $request->fileName . '.' . $ext);
             return response()->json([
                     'error' => false,
-                    'msg' =>  '/storage/user_data/'.$request->dir.'/'.$request->fileName . '.' . $request->file('file')->extension()
+                    'msg' =>  '/storage/user_data/'.$request->dir.'/'.$request->fileName . '.' . $ext
                 ]);
         }else{
             $return["error"] = TRUE;

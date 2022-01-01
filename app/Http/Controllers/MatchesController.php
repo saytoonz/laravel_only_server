@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Matches;
 use Illuminate\Http\Request;
 
 class MatchesController extends Controller
@@ -50,14 +51,10 @@ class MatchesController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+
+    public function getMatches($uid)
     {
-        //
+
+        return Matches::orWhere("user1",$uid)->orWhere('user2', $uid);
     }
 }
