@@ -6,8 +6,8 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.34)
-# Database: only_real
-# Generation Time: 2021-11-09 08:17:14 +0000
+# Database: only_new
+# Generation Time: 2022-01-02 04:24:10 +0000
 # ************************************************************
 
 
@@ -29,7 +29,7 @@ CREATE TABLE `app_users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `fb_uid` varchar(255) NOT NULL DEFAULT '',
   `phone` varchar(255) NOT NULL DEFAULT '',
-  `email` varchar(255) NOT NULL DEFAULT '',
+  `email` varchar(255) DEFAULT '',
   `first_name` varchar(255) NOT NULL DEFAULT '',
   `last_name` varchar(255) NOT NULL DEFAULT '',
   `date_of_birth` varchar(100) NOT NULL DEFAULT '',
@@ -52,8 +52,8 @@ LOCK TABLES `app_users` WRITE;
 
 INSERT INTO `app_users` (`id`, `fb_uid`, `phone`, `email`, `first_name`, `last_name`, `date_of_birth`, `city`, `country`, `current_address`, `gender`, `looking_for`, `age_range`, `in_use_recommendation`, `last_update`, `active`, `updated_at`, `created_at`)
 VALUES
-	(1,'OIkwGoypNGUy1KHpdeschFEQGFH3','+233208457888','sam@samel.com','Boyesssss','John','1063670400000','Haatso, Accra','Ghana','5.6610833, -0.15440779999999998','Man','Men','18:,36',3,'August 15, 2021, 1:32 am','yes','2021-10-19 23:25:03','2021-09-08 15:45:02'),
-	(2,'lBq7LrZ31MgGc0cTruKUYvmU3uh2','+233240066392 ','saytoonz05@gmail.com','Samuelaaaaa','Annin Yeboah','1058227200000','Accra','Ghana','5.6610833, -0.15440779999999998','Man','Both','',1,'July 15, 2021, 12:08 pm','yes',NULL,'2021-09-08 15:45:02'),
+	(1,'OIkwGoypNGUy1KHpdeschFEQGFH3ss','+2332084578885','sam@samel.com','Boyesssss','Johnjjjjjj','314755200000','Haatso, Accra D===Ghana','Afghanistan','5.6610833, -0.15440779999999998','Woman','Women','18:,52',3,'August 15, 2021, 1:32 am','yes','2021-12-20 21:04:31','2021-09-08 15:45:02'),
+	(2,'lBq7LrZ31MgGc0cTruKUYvmU3uh2ee','+233240066392 5','saytoonz05@gmail.com','Samuelaaaaa','Annin Yeboah','1058227200000','Accra','Ghana','5.6610833, -0.15440779999999998','Man','Both','',1,'July 15, 2021, 12:08 pm','yes',NULL,'2021-09-08 15:45:02'),
 	(19,'sfsfsf4ee','+2335467638449','sam@samuel.com','Boye','John','1058227200000','East Legon','Ghana','5.6610833, -0.15440779999999998','Man','Men','18:,25',3,'September 8, 2021, 7:26 pm','yes','2021-09-09 12:52:49','2021-09-08 19:26:53'),
 	(20,'sfsfsfhjiko;jhgfjhk,jhiluhjdj,ksnlknskdnkad','+2335467638449','sam@samel.com','Boye','John','1058227200000','East Legon','Ghana','5.6610833, -0.15440779999999998','Man','Men','18:,25',3,'September 9, 2021, 4:13 am','yes','2021-09-09 04:13:18','2021-09-09 04:13:18'),
 	(21,'sfsfsfhjiko;jhgfjhk,jhiluhjdj,ksnlknskdnkad\'','+2335467638449\'','sam@samel.com\'','Boye','John','1058227200000','East Legon','Ghana','5.6610833, -0.15440779999999998','Man','Men','18:,25',3,'September 9, 2021, 4:24 am','yes','2021-09-09 04:24:43','2021-09-09 04:24:43'),
@@ -63,9 +63,51 @@ VALUES
 	(26,'fb_uidddaerweeeer','024006','email@gm','Praise','Agyei','1058227200000','city','country','5.6610833, -0.15440779999999998','Man','Women','18:,25',4,'September 24, 2021, 3:11 pm','yes','2021-09-24 15:11:58','2021-09-24 15:11:58'),
 	(27,'fb_uidddaerweeeere','02400663','email@gma','Goodluck','Nancy','1058227200000','city','country','5.6610833, -0.15440779999999998','Man','Women','18:,25',4,'September 24, 2021, 3:12 pm','yes','2021-09-24 15:12:10','2021-09-24 15:12:10'),
 	(28,'fb_uidddaerweeeerer','024006639','email@gmai','Kuffour','Fripong','1058227200000','city','country','5.6610833, -0.15440779999999998','Man','Women','18:,25',4,'September 24, 2021, 3:12 pm','yes','2021-09-24 15:12:22','2021-09-24 15:12:22'),
-	(29,'jkd9ekdjnilauhihlehrlkangqaa','023393048573','email@mail.com','first_name','last_name','1058227200000','city','country','5.6610833, -0.15440779999999998','Man','Men','18:,25',4,'October 16, 2021, 6:31 pm','yes','2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(29,'jkd9ekdjnilauhihlehrlkangqaa','023393048573','email@mail.com','first_name','last_name','1058227200000','city','country','5.6610833, -0.15440779999999998','Man','Men','18:,25',4,'October 16, 2021, 6:31 pm','yes','2021-10-16 18:31:51','2021-10-16 18:31:51'),
+	(30,'OIkwGoypNGUy1KHpdeschFEQGddDFH3','+2332084579','email@mail.com','Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',0,'December 31, 2021, 9:02 pm','yes','2021-12-31 21:02:07','2021-12-31 21:02:07'),
+	(31,'dddddd','+23320845557888',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',0,'December 31, 2021, 9:05 pm','yes','2021-12-31 21:05:36','2021-12-31 21:05:36'),
+	(32,'dddtte','+233208457e888',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',0,'December 31, 2021, 9:07 pm','yes','2021-12-31 21:07:33','2021-12-31 21:07:33'),
+	(33,'errrgaew','+233208457884438',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',1,'December 31, 2021, 9:17 pm','yes','2021-12-31 21:17:11','2021-12-31 21:17:11'),
+	(34,'ppppkpk','098765',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',0,'January 1, 2022, 7:29 am','yes','2022-01-01 07:29:28','2022-01-01 07:29:28'),
+	(35,'OIkwGoypNGUy1KHpdescGFH3','+233208459888',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',1,'January 1, 2022, 7:50 am','yes','2022-01-01 07:50:21','2022-01-01 07:50:21'),
+	(36,'55555','444',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',1,'January 1, 2022, 8:07 am','yes','2022-01-01 08:07:21','2022-01-01 08:07:21'),
+	(37,'OIkwGoypNGUy1KHpdeschFEQddssdGFH3','+23320845788880',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',1,'January 1, 2022, 8:09 am','yes','2022-01-01 08:09:11','2022-01-01 08:09:11'),
+	(38,'i9ioiuhjhjgggderweq','90077',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',1,'January 1, 2022, 8:34 am','yes','2022-01-01 08:34:13','2022-01-01 08:34:13'),
+	(39,'OIkwGoypNGUy1KHpdescFH9','+2332084578840',NULL,'Dada','Joe','869097600000','Accra','Ghana','','Man','Women','18:,25',1,'January 1, 2022, 8:44 am','yes','2022-01-01 08:44:50','2022-01-01 08:44:50'),
+	(40,'efsgrs','+2332084578885',NULL,'Dada','Joseph','1072915200000','Accra','Ghana','','Man','Women','18:,25',1,'January 1, 2022, 9:35 am','yes','2022-01-01 09:35:03','2022-01-01 09:35:03'),
+	(41,'OIkwGoypNGUy1KHpdeschFEQGFH3','+233208457888','email@mail.com','Daaaaa','Joseph','1073260800000','East Legon Accra','Ghana',NULL,'Man','Women','18:,25',1,'January 1, 2022, 9:42 am','yes','2022-01-02 03:01:25','2022-01-01 09:42:35');
 
 /*!40000 ALTER TABLE `app_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table chat_lists
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `chat_lists`;
+
+CREATE TABLE `chat_lists` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner` int(11) DEFAULT NULL,
+  `to` int(11) DEFAULT NULL,
+  `from` int(11) DEFAULT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'text',
+  `message` text,
+  `status` enum('SEEN','SENT','DELIVERED','READ','DELETED') DEFAULT 'SENT',
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `chat_lists` WRITE;
+/*!40000 ALTER TABLE `chat_lists` DISABLE KEYS */;
+
+INSERT INTO `chat_lists` (`id`, `owner`, `to`, `from`, `type`, `message`, `status`, `updated_at`, `created_at`)
+VALUES
+	(3,1,2,1,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:41:26','2021-11-19 06:40:43'),
+	(4,2,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:41:26','2021-11-19 06:40:43');
+
+/*!40000 ALTER TABLE `chat_lists` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -76,14 +118,35 @@ DROP TABLE IF EXISTS `chats`;
 
 CREATE TABLE `chats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `from` int(11) NOT NULL,
-  `to` int(11) NOT NULL,
-  `type` enum('') NOT NULL,
-  `message` text NOT NULL,
+  `from` int(11) DEFAULT NULL,
+  `to` int(11) DEFAULT NULL,
+  `type` varchar(10) NOT NULL DEFAULT 'text',
+  `message` text,
+  `status` enum('SEEN','SENT','DELIVERED','READ','DELETED') DEFAULT 'SENT',
+  `updated_at` datetime NOT NULL,
   `created_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `chats` WRITE;
+/*!40000 ALTER TABLE `chats` DISABLE KEYS */;
+
+INSERT INTO `chats` (`id`, `from`, `to`, `type`, `message`, `status`, `updated_at`, `created_at`)
+VALUES
+	(3,1,2,'image','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:23:03','2021-11-19 06:23:03'),
+	(4,1,2,'image','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:23:44','2021-11-19 06:23:44'),
+	(5,1,2,'image','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:24:11','2021-11-19 06:24:11'),
+	(6,1,2,'image','/storage/user_data/chat_image/fileName.png','DELETED','2021-11-19 06:24:21','2021-11-19 06:24:21'),
+	(7,1,2,'image','/storage/user_data/chat_image/fileName.png','DELETED','2021-11-19 06:32:41','2021-11-19 06:32:41'),
+	(8,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:34:08','2021-11-19 06:34:08'),
+	(9,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:36:12','2021-11-19 06:36:12'),
+	(10,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:40:21','2021-11-19 06:40:21'),
+	(11,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:40:33','2021-11-19 06:40:33'),
+	(12,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:40:43','2021-11-19 06:40:43'),
+	(13,1,2,'images','/storage/user_data/chat_image/fileName.png','SENT','2021-11-19 06:41:26','2021-11-19 06:41:26');
+
+/*!40000 ALTER TABLE `chats` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table data_rows
@@ -385,7 +448,15 @@ VALUES
 	(8,26,1,1,1,1,1,1,1,1,'2021-09-24 15:11:58','2021-09-24 15:11:58'),
 	(9,27,1,1,1,1,1,1,1,1,'2021-09-24 15:12:10','2021-09-24 15:12:10'),
 	(10,28,1,1,1,1,1,1,1,1,'2021-09-24 15:12:22','2021-09-24 15:12:22'),
-	(11,29,1,1,1,1,1,1,1,1,'2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(11,29,1,1,1,1,1,1,1,1,'2021-10-16 18:31:51','2021-10-16 18:31:51'),
+	(12,33,1,1,1,1,1,1,1,1,'2021-12-31 21:17:11','2021-12-31 21:17:11'),
+	(13,35,1,1,1,1,1,1,1,1,'2022-01-01 07:50:21','2022-01-01 07:50:21'),
+	(14,36,1,1,1,1,1,1,1,1,'2022-01-01 08:07:21','2022-01-01 08:07:21'),
+	(15,37,1,1,1,1,1,1,1,1,'2022-01-01 08:09:11','2022-01-01 08:09:11'),
+	(16,38,1,1,1,1,1,1,1,1,'2022-01-01 08:34:13','2022-01-01 08:34:13'),
+	(17,39,1,1,1,1,1,1,1,1,'2022-01-01 08:44:50','2022-01-01 08:44:50'),
+	(18,40,1,1,1,1,1,1,1,1,'2022-01-01 09:35:03','2022-01-01 09:35:03'),
+	(19,41,1,1,1,1,1,1,1,1,'2022-01-01 09:42:35','2022-01-02 03:01:40');
 
 /*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -554,15 +625,23 @@ LOCK TABLES `premium` WRITE;
 
 INSERT INTO `premium` (`id`, `uid`, `premium_active`, `super_likes`, `incognito_mode`, `boost`, `recommendations`, `country`, `city`, `updated_at`, `created_at`)
 VALUES
-	(1,2,1,10,1,0,'','UK','London','2021-09-09 15:02:21',NULL),
-	(3,19,1,0,0,0,'3','Ghana','East Legon','2021-09-10 05:32:18','2021-09-10 05:32:18'),
-	(4,1,0,0,0,0,'3','Ghana','East Legon','2021-09-15 03:01:49','2021-09-15 03:01:49'),
+	(1,2,0,10,1,0,'','UK','London','2021-09-09 15:02:21',NULL),
+	(3,19,0,0,0,0,'3','Ghana','East Legon','2021-09-10 05:32:18','2021-09-10 05:32:18'),
+	(4,1,0,10,1,0,'3','Ghana','East Legon','2021-12-20 21:01:41','2021-09-15 03:01:49'),
 	(5,24,0,0,0,0,'4','country','city','2021-09-24 12:38:29','2021-09-24 12:38:29'),
 	(6,25,0,0,0,0,'4','country','city','2021-09-24 15:10:23','2021-09-24 15:10:23'),
 	(7,26,0,0,0,0,'4','country','city','2021-09-24 15:11:58','2021-09-24 15:11:58'),
 	(8,27,0,0,0,0,'4','country','city','2021-09-24 15:12:10','2021-09-24 15:12:10'),
 	(9,28,0,0,0,0,'4','country','city','2021-09-24 15:12:22','2021-09-24 15:12:22'),
-	(10,29,0,0,0,0,'4','country','city','2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(10,29,0,0,0,0,'4','country','city','2021-10-16 18:31:51','2021-10-16 18:31:51'),
+	(11,33,0,0,0,0,'1','Ghana','Accra','2021-12-31 21:17:11','2021-12-31 21:17:11'),
+	(12,35,0,0,0,0,'1','Ghana','Accra','2022-01-01 07:50:21','2022-01-01 07:50:21'),
+	(13,36,0,0,0,0,'1','Ghana','Accra','2022-01-01 08:07:21','2022-01-01 08:07:21'),
+	(14,37,0,0,0,0,'1','Ghana','Accra','2022-01-01 08:09:11','2022-01-01 08:09:11'),
+	(15,38,0,0,0,0,'1','Ghana','Accra','2022-01-01 08:34:13','2022-01-01 08:34:13'),
+	(16,39,0,0,0,0,'1','Ghana','Accra','2022-01-01 08:44:50','2022-01-01 08:44:50'),
+	(17,40,0,0,0,0,'1','Ghana','Accra','2022-01-01 09:35:03','2022-01-01 09:35:03'),
+	(18,41,0,0,0,0,'1','Ghana','Accra','2022-01-01 09:42:35','2022-01-01 09:42:35');
 
 /*!40000 ALTER TABLE `premium` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -599,10 +678,7 @@ LOCK TABLES `recommendations` WRITE;
 
 INSERT INTO `recommendations` (`id`, `recommender_fname`, `recommender_sname`, `recommender_phone`, `recommender_email`, `friend_name`, `friend_phone`, `how_you_know_friend`, `why_great`, `conversation_open`, `recording_path`, `sms_code`, `used_by`, `date_used`, `active`, `updated_at`, `created_at`)
 VALUES
-	(1,'Samuel','Annin Yeboah','+233540982746','saytoonz05@email.com','My Friend name','+233240066392','Don\'t remember','He\'s just great and its that','Don\'t talk to her, she\'s ok','user_data/recommendations/1625578822614.mp3','X5rscL',2,'July 15, 2021, 12:08 pm','used','2021-09-09 04:54:17','2021-09-17 21:07:53'),
-	(2,'Samuel','Annin Yeboah','+233540982746','saytoonz05@email.com','Jonathan Kwateng ','+233500489111','We studied together at KNUST and we were in the same sorority','Fatima is one of the funniest people I know. But she is also very kind and passionate about her hobbies, mountaineering and travelling. ','Ask her about anything, but not sports. She really hates soccer and she hates running.','user_data/recommendations/1625653700928.mp3','CRM4ad',2,'','yes','July 7, 2021, 12:29 pm','2021-09-17 21:07:48'),
-	(3,'Samuel','Annin Yeboah','+233540982746','saytoonz05@email.com','Samira Yeboah','+233208457888','We studied together at KNUST and we were in the same sorority','Fatima is one of the funniest people I know. But she is also very kind and passionate about her hobbies, mountaineering and travelling. ','Fatima is one of the funniest people I know. But she is also very kind and passionate about her hobbies, mountaineering and travelling. ','user_data/recommendations/1625936590560.mp3','jzmzIf',21,'July 14, 2021, 8:40 pm','used','2021-09-09 04:24:43','2021-09-09 04:24:43'),
-	(4,'Samuel','Nana Yaw','+23323456789','sam@sam.com','Yooyoo','+23455392839','Ask God bro','Just not greater than God','Ask for phone number','recPath/findout/audio.mp3','FZSGac',29,'October 16, 2021, 6:31 pm','rej','2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(1,'Samuel','Issa Sukatu','+233200021686','sam@suka.issa','Berck Baafi','+233208457888','Massa we all went to one school ok','Oh he is cool and hard work, he smiles a whole lot','Massa I\'m tired, no more questions please....','/storage/user_data/recommendations/1640982422940.mp3','SIGoDG',41,'January 1, 2022, 9:42 am','used','2022-01-01 09:42:35','2022-01-01 09:42:35');
 
 /*!40000 ALTER TABLE `recommendations` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -754,37 +830,49 @@ CREATE TABLE `user_about` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` int(11) unsigned NOT NULL,
   `height_cm` int(11) NOT NULL DEFAULT '180',
-  `work_role` text,
-  `work_organization` text,
-  `edu_level` text,
-  `edu_school` text,
-  `interests` varchar(225) DEFAULT '',
-  `fun_question_one` text,
-  `fun_answer_one` text,
-  `fun_question_two` text,
-  `fun_answer_two` text,
+  `work_role` longtext COLLATE utf8mb4_unicode_ci,
+  `work_organization` longtext COLLATE utf8mb4_unicode_ci,
+  `edu_level` longtext COLLATE utf8mb4_unicode_ci,
+  `edu_school` longtext COLLATE utf8mb4_unicode_ci,
+  `interests` longtext COLLATE utf8mb4_unicode_ci,
+  `fun_question_one` longtext COLLATE utf8mb4_unicode_ci,
+  `fun_answer_one` longtext COLLATE utf8mb4_unicode_ci,
+  `fun_question_two` longtext COLLATE utf8mb4_unicode_ci,
+  `fun_answer_two` longtext COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`),
   CONSTRAINT `user_about_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `app_users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 LOCK TABLES `user_about` WRITE;
 /*!40000 ALTER TABLE `user_about` DISABLE KEYS */;
 
 INSERT INTO `user_about` (`id`, `uid`, `height_cm`, `work_role`, `work_organization`, `edu_level`, `edu_school`, `interests`, `fun_question_one`, `fun_answer_one`, `fun_question_two`, `fun_answer_two`, `created_at`, `updated_at`)
 VALUES
-	(1,1,180,'','','','','Cats','','','','',NULL,NULL),
-	(2,2,0,'','','','','Cats','','','','',NULL,NULL),
-	(3,19,180,NULL,NULL,NULL,NULL,'Astrology',NULL,NULL,NULL,NULL,'2021-09-10 05:15:36','2021-09-10 05:15:36'),
-	(4,23,180,'','','','','Cats','','','','','2021-09-24 05:12:21','2021-09-24 05:12:21'),
-	(5,24,180,'','','','','Astrology','','','','','2021-09-24 12:38:29','2021-09-24 12:38:29'),
-	(6,25,180,'','','','','Cats','','','','','2021-09-24 15:10:23','2021-09-24 15:10:23'),
-	(7,26,180,'','','','','Cats','','','','','2021-09-24 15:11:58','2021-09-24 15:11:58'),
-	(8,27,180,'','','','','Cats','','','','','2021-09-24 15:12:10','2021-09-24 15:12:10'),
-	(9,28,180,'','','','','Cats','','','','','2021-09-24 15:12:22','2021-09-24 15:12:22'),
-	(10,29,180,'','','','','','','','','','2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(1,1,147,'adsfdg',NULL,NULL,NULL,'?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','I am guilty of ......','hgjjjkk',NULL,NULL,NULL,'2021-12-20 21:03:17'),
+	(2,2,0,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','',NULL,NULL),
+	(3,19,180,NULL,NULL,NULL,NULL,'?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space',NULL,NULL,NULL,NULL,'2021-09-10 05:15:36','2021-09-10 05:15:36'),
+	(4,23,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2021-09-24 05:12:21','2021-09-24 05:12:21'),
+	(5,24,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2021-09-24 12:38:29','2021-09-24 12:38:29'),
+	(6,25,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2021-09-24 15:10:23','2021-09-24 15:10:23'),
+	(7,26,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2021-09-24 15:11:58','2021-09-24 15:11:58'),
+	(8,27,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? SpaceCats','','','','','2021-09-24 15:12:10','2021-09-24 15:12:10'),
+	(9,28,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? SpaceCats','','','','','2021-09-24 15:12:22','2021-09-24 15:12:22'),
+	(10,29,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2021-10-16 18:31:51','2021-10-16 18:31:51'),
+	(11,30,180,NULL,NULL,NULL,NULL,'?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space',NULL,NULL,NULL,NULL,'2021-12-31 21:02:21','2021-12-31 21:02:21'),
+	(12,31,180,NULL,NULL,NULL,NULL,'?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space',NULL,NULL,NULL,NULL,'2021-12-31 21:06:21','2021-12-31 21:06:21'),
+	(13,32,180,NULL,NULL,NULL,NULL,'?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space',NULL,NULL,NULL,NULL,'2021-12-31 21:08:21','2021-12-31 21:08:21'),
+	(14,33,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2021-12-31 21:17:11','2021-12-31 21:17:11'),
+	(15,34,180,NULL,NULL,NULL,NULL,'?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space',NULL,NULL,NULL,NULL,'2022-01-01 07:30:17','2022-01-01 07:30:17'),
+	(16,35,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2022-01-01 07:50:21','2022-01-01 07:50:21'),
+	(17,36,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2022-01-01 08:07:21','2022-01-01 08:07:21'),
+	(18,37,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2022-01-01 08:09:11','2022-01-01 08:09:11'),
+	(19,38,180,'','','','','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','','','','','2022-01-01 08:34:13','2022-01-01 08:34:13'),
+	(20,39,180,'work','work work works','School','Schooling school','?‍♀️ Meditating:,?️ Indoors:,? Music:,? Youtube:,?‍? Space','A person I learn a lot from is....','Elon','From time to time it is good to....','smile','2022-01-01 08:44:50','2022-01-01 09:23:30'),
+	(21,40,180,'CEO','Nsromapa','BSc','UNER','? Music:,?‍♀️ Meditating:,?️ Indoors:,? Youtube:,?‍? Space','A person I learn a lot from is....','Elon','From time to time it is good to....','Smile','2022-01-01 09:35:03','2022-01-01 09:35:05'),
+	(22,41,168,'CEO/CFO','Nsromapa Corporation','BSc','UNER','?‍? Space:,? Youtube:,? Music:,?‍♀️ Meditating:,?️ Indoors','From time to time it is good to....','Elon Musk','Have I told you....?','to smile always','2022-01-01 09:42:35','2022-01-02 03:02:42');
 
 /*!40000 ALTER TABLE `user_about` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -810,12 +898,18 @@ LOCK TABLES `user_likes` WRITE;
 
 INSERT INTO `user_likes` (`id`, `from`, `to`, `isliked`, `created_at`, `updated_at`)
 VALUES
-	(1,24,1,1,'2021-10-24 16:55:48','2021-10-24 16:58:34'),
-	(2,25,1,1,'2021-10-24 16:58:38','2021-10-24 16:58:38'),
-	(3,19,1,1,'2021-10-24 16:58:46','2021-10-24 16:58:46'),
-	(4,20,1,1,'2021-10-24 16:58:51','2021-10-24 16:58:51'),
-	(5,21,1,1,'2021-10-24 16:58:54','2021-10-24 16:58:54'),
-	(6,22,1,1,'2021-10-24 16:58:57','2021-10-24 16:58:57');
+	(5,41,29,1,'2022-01-02 02:57:23','2022-01-02 03:22:28'),
+	(6,41,33,1,'2022-01-02 02:57:24','2022-01-02 02:57:24'),
+	(7,41,35,1,'2022-01-02 02:57:37','2022-01-02 02:57:37'),
+	(8,41,28,1,'2022-01-02 02:58:45','2022-01-02 03:23:38'),
+	(9,41,31,1,'2022-01-02 02:58:51','2022-01-02 03:23:07'),
+	(10,41,32,1,'2022-01-02 02:59:15','2022-01-02 02:59:15'),
+	(11,41,30,1,'2022-01-02 03:16:43','2022-01-02 03:23:29'),
+	(12,41,25,1,'2022-01-02 03:17:37','2022-01-02 03:22:38'),
+	(13,41,26,0,'2022-01-02 03:22:16','2022-01-02 03:22:16'),
+	(14,41,38,1,'2022-01-02 03:22:45','2022-01-02 03:22:45'),
+	(15,41,27,1,'2022-01-02 03:23:23','2022-01-02 03:23:23'),
+	(16,41,19,1,'2022-01-02 03:23:51','2022-01-02 03:23:51');
 
 /*!40000 ALTER TABLE `user_likes` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -856,7 +950,19 @@ VALUES
 	(9,26,'user_data/profilePhotos/1626185479628.png','user_data/profilePhotos/1626185479879.png','user_data/profilePhotos/1626185479879.png','','','','2021-09-24 15:11:58','2021-09-24 15:11:58'),
 	(10,27,'user_data/profilePhotos/1626185479628.png','user_data/profilePhotos/1626185479879.png','','','','','2021-09-24 15:12:10','2021-09-24 15:12:10'),
 	(11,28,'user_data/profilePhotos/1626185479628.png','user_data/profilePhotos/1626185479879.pnguser_data/profilePhotos/1626185479879.png','user_data/profilePhotos/1626185479879.png','','','','2021-09-24 15:12:22','2021-09-24 15:12:22'),
-	(12,29,'user_data/profilePhotos/1626185479628.png','user_data/profilePhotos/1626185479879.png','user_data/profilePhotos/1626185479879.png','','','','2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(12,29,'user_data/profilePhotos/1626185479628.png','user_data/profilePhotos/1626185479879.png','user_data/profilePhotos/1626185479879.png','','','','2021-10-16 18:31:51','2021-10-16 18:31:51'),
+	(13,30,NULL,NULL,NULL,NULL,NULL,'','2021-12-31 21:02:21','2021-12-31 21:02:21'),
+	(14,31,NULL,NULL,NULL,NULL,NULL,'','2021-12-31 21:06:21','2021-12-31 21:06:21'),
+	(15,32,NULL,NULL,NULL,NULL,NULL,'','2021-12-31 21:08:21','2021-12-31 21:08:21'),
+	(16,33,'','','','','','','2021-12-31 21:17:11','2021-12-31 21:17:11'),
+	(17,34,NULL,NULL,NULL,NULL,NULL,'','2022-01-01 07:30:17','2022-01-01 07:30:17'),
+	(18,35,'/storage/user_data/profilePhotos/1641023421814.jpg','/storage/user_data/profilePhotos/1641023421920.jpg',NULL,NULL,NULL,NULL,'2022-01-01 07:50:21','2022-01-01 08:04:14'),
+	(19,36,'','','','','','','2022-01-01 08:07:21','2022-01-01 08:07:21'),
+	(20,37,'/storage/user_data/profilePhotos/1641023421920.jpg','/storage/user_data/profilePhotos/1641023421920.jpg',NULL,NULL,NULL,NULL,'2022-01-01 08:09:11','2022-01-01 08:19:06'),
+	(21,38,'/storage/user_data/profilePhotos/1641026053880.jpg','/storage/user_data/profilePhotos/1641026054016.jpg',NULL,NULL,NULL,NULL,'2022-01-01 08:34:13','2022-01-01 08:34:13'),
+	(22,39,'/storage/user_data/profilePhotos/1641026690496.jpg','/storage/user_data/profilePhotos/1641026690626.jpg','/storage/user_data/profilePhotos/1641026690727.jpg',NULL,NULL,NULL,'2022-01-01 08:44:50','2022-01-01 08:44:50'),
+	(23,40,'/storage/user_data/profilePhotos/1641029704260.jpg','/storage/user_data/profilePhotos/1641029704897.jpg','/storage/user_data/profilePhotos/1641029704993.jpg',NULL,NULL,NULL,'2022-01-01 09:35:03','2022-01-01 09:35:04'),
+	(24,41,'/storage/user_data/profilePhotos/1641092437932.jpg','/storage/user_data/profilePhotos/1641092438843.jpg','/storage/user_data/profilePhotos/1641030155366.jpg','/storage/user_data/profilePhotos/1641090181722.jpg','/storage/user_data/profilePhotos/1641092439227.jpg','/storage/user_data/profilePhotos/1641092605653.jpg','2022-01-01 09:42:35','2022-01-02 03:15:21');
 
 /*!40000 ALTER TABLE `user_media` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -904,7 +1010,18 @@ INSERT INTO `user_utils` (`id`, `uid`, `interested`, `not_interested`, `likers`,
 VALUES
 	(1,1,'','','',NULL,NULL),
 	(2,2,'','','',NULL,NULL),
-	(3,19,NULL,NULL,NULL,'2021-09-10 05:18:55','2021-09-10 05:18:55');
+	(3,19,NULL,NULL,NULL,'2021-09-10 05:18:55','2021-09-10 05:18:55'),
+	(4,30,NULL,NULL,NULL,'2021-12-31 21:02:21','2021-12-31 21:02:21'),
+	(5,31,NULL,NULL,NULL,'2021-12-31 21:06:21','2021-12-31 21:06:21'),
+	(6,32,NULL,NULL,NULL,'2021-12-31 21:08:21','2021-12-31 21:08:21'),
+	(7,33,NULL,NULL,NULL,'2021-12-31 21:18:21','2021-12-31 21:18:21'),
+	(8,34,NULL,NULL,NULL,'2022-01-01 07:30:17','2022-01-01 07:30:17'),
+	(9,35,NULL,NULL,NULL,'2022-01-01 07:51:27','2022-01-01 07:51:27'),
+	(10,36,NULL,NULL,NULL,'2022-01-01 08:07:27','2022-01-01 08:07:27'),
+	(11,37,NULL,NULL,NULL,'2022-01-01 08:09:27','2022-01-01 08:09:27'),
+	(12,38,NULL,NULL,NULL,'2022-01-01 08:34:27','2022-01-01 08:34:27'),
+	(13,39,NULL,NULL,NULL,'2022-01-01 08:45:40','2022-01-01 08:45:40'),
+	(14,41,NULL,NULL,NULL,'2022-01-01 10:05:36','2022-01-01 10:05:36');
 
 /*!40000 ALTER TABLE `user_utils` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -955,7 +1072,6 @@ CREATE TABLE `verified` (
   `status` enum('Pending','Rejected','Verified','') NOT NULL DEFAULT 'Pending',
   `image` text,
   `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `last_updated` text,
   `date_verified` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -967,17 +1083,29 @@ CREATE TABLE `verified` (
 LOCK TABLES `verified` WRITE;
 /*!40000 ALTER TABLE `verified` DISABLE KEYS */;
 
-INSERT INTO `verified` (`id`, `uid`, `status`, `image`, `date_added`, `last_updated`, `date_verified`, `created_at`, `updated_at`)
+INSERT INTO `verified` (`id`, `uid`, `status`, `image`, `date_added`, `date_verified`, `created_at`, `updated_at`)
 VALUES
-	(1,1,'Rejected','user_data/verificationPhotos/1627821576183.png','2021-07-16 14:52:43','August 1, 2021, 12:15 am','',NULL,NULL),
-	(2,19,'Pending',NULL,'2021-09-10 05:26:06',NULL,NULL,'2021-09-10 05:26:06','2021-09-10 05:26:06'),
-	(3,23,'Pending',NULL,'2021-09-24 05:12:21',NULL,NULL,'2021-09-24 05:12:21','2021-09-24 05:12:21'),
-	(4,24,'Pending',NULL,'2021-09-24 12:38:29',NULL,NULL,'2021-09-24 12:38:29','2021-09-24 12:38:29'),
-	(5,25,'Pending',NULL,'2021-09-24 15:10:23',NULL,NULL,'2021-09-24 15:10:23','2021-09-24 15:10:23'),
-	(6,26,'Pending',NULL,'2021-09-24 15:11:58',NULL,NULL,'2021-09-24 15:11:58','2021-09-24 15:11:58'),
-	(7,27,'Pending',NULL,'2021-09-24 15:12:10',NULL,NULL,'2021-09-24 15:12:10','2021-09-24 15:12:10'),
-	(8,28,'Pending',NULL,'2021-09-24 15:12:22',NULL,NULL,'2021-09-24 15:12:22','2021-09-24 15:12:22'),
-	(9,29,'Pending',NULL,'2021-10-16 18:31:51',NULL,NULL,'2021-10-16 18:31:51','2021-10-16 18:31:51');
+	(1,1,'Rejected','user_data/verificationPhotos/1627821576183.png','2021-07-16 14:52:43','',NULL,NULL),
+	(2,19,'Pending',NULL,'2021-09-10 05:26:06',NULL,'2021-09-10 05:26:06','2021-09-10 05:26:06'),
+	(3,23,'Pending',NULL,'2021-09-24 05:12:21',NULL,'2021-09-24 05:12:21','2021-09-24 05:12:21'),
+	(4,24,'Pending',NULL,'2021-09-24 12:38:29',NULL,'2021-09-24 12:38:29','2021-09-24 12:38:29'),
+	(5,25,'Pending',NULL,'2021-09-24 15:10:23',NULL,'2021-09-24 15:10:23','2021-09-24 15:10:23'),
+	(6,26,'Pending',NULL,'2021-09-24 15:11:58',NULL,'2021-09-24 15:11:58','2021-09-24 15:11:58'),
+	(7,27,'Pending',NULL,'2021-09-24 15:12:10',NULL,'2021-09-24 15:12:10','2021-09-24 15:12:10'),
+	(8,28,'Pending',NULL,'2021-09-24 15:12:22',NULL,'2021-09-24 15:12:22','2021-09-24 15:12:22'),
+	(9,29,'Pending',NULL,'2021-10-16 18:31:51',NULL,'2021-10-16 18:31:51','2021-10-16 18:31:51'),
+	(10,30,'Pending',NULL,'2021-12-31 21:02:21',NULL,'2021-12-31 21:02:21','2021-12-31 21:02:21'),
+	(11,31,'Pending',NULL,'2021-12-31 21:06:21',NULL,'2021-12-31 21:06:21','2021-12-31 21:06:21'),
+	(12,32,'Pending',NULL,'2021-12-31 21:08:21',NULL,'2021-12-31 21:08:21','2021-12-31 21:08:21'),
+	(13,33,'Pending',NULL,'2021-12-31 21:17:11',NULL,'2021-12-31 21:17:11','2021-12-31 21:17:11'),
+	(14,34,'Pending',NULL,'2022-01-01 07:30:17',NULL,'2022-01-01 07:30:17','2022-01-01 07:30:17'),
+	(15,35,'Pending',NULL,'2022-01-01 07:50:21',NULL,'2022-01-01 07:50:21','2022-01-01 07:50:21'),
+	(16,36,'Pending',NULL,'2022-01-01 08:07:21',NULL,'2022-01-01 08:07:21','2022-01-01 08:07:21'),
+	(17,37,'Pending',NULL,'2022-01-01 08:09:11',NULL,'2022-01-01 08:09:11','2022-01-01 08:09:11'),
+	(18,38,'Pending',NULL,'2022-01-01 08:34:13',NULL,'2022-01-01 08:34:13','2022-01-01 08:34:13'),
+	(19,39,'Pending',NULL,'2022-01-01 08:44:50',NULL,'2022-01-01 08:44:50','2022-01-01 08:44:50'),
+	(20,40,'Pending',NULL,'2022-01-01 09:35:03',NULL,'2022-01-01 09:35:03','2022-01-01 09:35:03'),
+	(21,41,'Rejected','/storage/user_data/verificationPhotos/1641090851516.jpg','2022-01-01 09:42:35',NULL,'2022-01-01 09:42:35','2022-01-02 02:34:11');
 
 /*!40000 ALTER TABLE `verified` ENABLE KEYS */;
 UNLOCK TABLES;
