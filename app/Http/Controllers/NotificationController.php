@@ -85,8 +85,7 @@ class NotificationController extends Controller
         } catch (\Exception $e) {
             $response["error"] = TRUE;
             $response["msg"] = "An error occurred, please try again.";
-            echo $e;
-            exit();
+
         }
         return $response;
     }

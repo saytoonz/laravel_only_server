@@ -78,6 +78,8 @@ class PremiumController extends Controller
         } catch (\Exception $e) {
             $response["error"] = TRUE;
             $response["msg"] = "An unknown error occurred, please try again.";
+            echo $e;
+            exit();
         }
         return json_encode($response);
     }
