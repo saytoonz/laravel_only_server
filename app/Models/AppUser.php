@@ -29,6 +29,9 @@ class AppUser extends Model
         'last_update',
         'current_address'
     ];
+    protected $casts = [
+        'current_address' => 'array'
+    ];
 
     public function about()
     {

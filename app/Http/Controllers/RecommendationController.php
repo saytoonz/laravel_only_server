@@ -237,7 +237,7 @@ The ONLY! Team";
         $postInput = [
             'apiKey' => 'cSMS76b8512f69953562-d7c386f5bdb710ee',
             'phone' => [$phone],
-            'sender' => 'Only',
+            'sender' => 'ONLY',
             'message' => $message,
         ];
 
