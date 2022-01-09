@@ -35,6 +35,8 @@ class NewLoginController extends Controller
 
     }catch(\Exception $e){
 
+        echo $e;
+
         $response["error"] = TRUE;
         $response["msg"] = "An unknown error occurred, please try again.";
     }
