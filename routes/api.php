@@ -4,6 +4,7 @@ use App\Http\Controllers\NewLoginController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\PremiumController;
 use App\Http\Controllers\AppUserController;
+use App\Http\Controllers\AppUserReportsController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MatchesController;
 use App\Http\Controllers\RecommendationController;
@@ -106,6 +107,9 @@ Route::post('create-chat',[ ChatController::class, 'store']);
 
 //New Login route
 Route::post('check-and-login', [NewLoginController::class, 'newLogin']);
+
+//Report user actions
+Route::post('appuser-report', [AppUserReportsController::class, 'store']);
 
 //File Uploader route
 Route::post('upload-file', [UploadFileController::class, 'saveFile']);

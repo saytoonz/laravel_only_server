@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Matches;
 use App\Models\UserLikes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserLikesController extends Controller
 {
@@ -16,7 +19,9 @@ class UserLikesController extends Controller
 
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(), [
+
+
+        $validator = Validator::make($request->all(), [
             'from' => 'required',
             'to' => 'required',
             'isliked' => 'required',
@@ -32,17 +37,34 @@ class UserLikesController extends Controller
         try {
             $userLike = UserLikes::updateOrCreate(
                 [
-                    'to'=> $request->to,
-                    'from'=> $request->from,
+                    'to' => $request->to,
+                    'from' => $request->from,
                 ],
                 [
-                    'to'=> $request->to,
-                    'from'=> $request->from,
-                    'isliked'=> $request->isliked,
+                    'to' => $request->to,
+                    'from' => $request->from,
+                    'isliked' => $request->isliked,
                 ]
             );
             if ($userLike) {
                 $userLikedMe = UserLikes::where('from', $request->to)->where('to', $request->from)->first();
+
+                if ($userLikedMe->isliked == 1 && $request->isliked == 1) {
+                    $existing1 = Matches::where('user1', $request->to)
+                        ->where('user2', $request->from)->first();
+                    $existing2 = Matches::where('user2', $request->to)
+                        ->where('user1', $request->from)->first();
+
+                    if (is_null($existing1) && is_null($existing2)) {
+                        Matches::Create(
+                            [
+                                'user1' => $request->to,
+                                'user2' => $request->from,
+                            ]
+                        );
+                    }
+                }
+
                 $response["error"] = FALSE;
                 $response["msg"] = "done";
                 $response['user_my_like'] = $userLike;
@@ -52,7 +74,7 @@ class UserLikesController extends Controller
                 $response["msg"] = "An unknown error occurred, please try again.";
             }
         } catch (\Throwable $th) {
-            //throw $th;
+            throw $th;
             $response["error"] = TRUE;
             $response["msg"] = "An unknown error occurred, please try again.";
         }
