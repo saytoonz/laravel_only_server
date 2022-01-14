@@ -14,4 +14,5 @@ class Matches extends Model
         'user1',
         'user2'
     ];
+
 }

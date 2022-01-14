@@ -19,6 +19,6 @@ class UserUtils extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'uid', 'id');
+        return $this->belongsTo(AppUser::class, 'uid', 'id');
     }
 }

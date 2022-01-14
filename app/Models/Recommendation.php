@@ -26,6 +26,6 @@ class Recommendation extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class, 'in_use_recommendation', 'id');
+        return $this->belongsTo(AppUser::class, 'in_use_recommendation', 'id');
     }
 }

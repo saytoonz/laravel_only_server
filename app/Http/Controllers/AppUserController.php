@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MatchesResource;
 use App\Models\Notification;
 use App\Models\Premium;
 use App\Models\Recommendation;
 use App\Models\AppUser;
+use App\Models\Matches;
 use App\Models\UserAbout;
 use App\Models\UserMedia;
 use App\Models\UserUtils;
 use App\Models\Verified;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Models\UserLikes;
 use Illuminate\Support\Facades\DB;
 
 class AppUserController extends Controller
@@ -25,7 +28,7 @@ class AppUserController extends Controller
 
     public function getPotentialUsers($uid)
     {
-        return UserResource::collection(AppUser::where('id', '!=', $uid)->inRandomOrder()->paginate(10));
+        return UserResource::collection(AppUser::where('id', '!=', $uid)->inRandomOrder()->paginate(100));
     }
 
 
@@ -296,6 +299,66 @@ class AppUserController extends Controller
             $response["msg"] = "AppUser not found!";
         }
 
+        return json_encode($response);
+    }
+
+
+
+    public function userMatches($uid)
+    {
+        $response = array("error" => FALSE);
+        try {
+            $matches = Matches::where('user1',$uid)->orwhere('user2', $uid)->orderBy('created_at','DESC')->get();
+
+            $data = [];
+
+            foreach ($matches as $key => $value) {
+                $userId = $value->user1 != $uid ? $value->user1: $value->user2;
+                $data[] = [
+                    'match' => $value,
+                    'appUser' => UserResource::collection(AppUser::where('id', $userId)->get())->first(),
+                ];
+            }
+
+            $response["message"] = "success";
+            $response["data"] = $data;
+            $response["error"] =false;
+        } catch (\Throwable $th) {
+            // throw $th;
+            $response["error"] =true;
+            $response["message"] = "Server error!";
+        }
+        return json_encode($response);
+    }
+
+
+
+    public function userLikers($uid)
+    {
+        $response = array("error" => FALSE);
+        try {
+            $likers = UserLikes::where('to',$uid)->where('isliked', 1)->orderBy('created_at','DESC')->get();
+
+            $data = [];
+
+            foreach ($likers as $key => $value) {
+                $liked = UserLikes::where('to',$value->from)->where('from', $uid)->get()->first();
+                if($liked == null){
+                    $data[] = [
+                        'like' => $value,
+                        'appUser' => UserResource::collection(AppUser::where('id', $value->from)->get())->first(),
+                    ];
+                }
+            }
+
+            $response["message"] = "success";
+            $response["data"] = $data;
+            $response["error"] =false;
+        } catch (\Throwable $th) {
+            // throw $th;
+            $response["error"] =true;
+            $response["message"] = "Server error!";
+        }
         return json_encode($response);
     }
 }

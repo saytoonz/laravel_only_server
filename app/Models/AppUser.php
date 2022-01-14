@@ -65,4 +65,5 @@ class AppUser extends Model
     {
         return $this->hasMany(UserLikes::class, 'from');
     }
+
 }

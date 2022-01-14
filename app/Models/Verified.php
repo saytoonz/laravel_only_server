@@ -18,6 +18,6 @@ class Verified extends Model
     ];
 
     public function user(){
-        return $this->belongsTo(User::class, 'id', 'uid');
+        return $this->belongsTo(AppUser::class, 'id', 'uid');
     }
 }

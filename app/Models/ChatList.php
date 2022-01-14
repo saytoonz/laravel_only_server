@@ -14,6 +14,7 @@ class ChatList extends Model
         'to',
         'from',
         'type',
-        'status'
+        'status',
+        'unread',
     ];
 }

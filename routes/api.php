@@ -14,6 +14,7 @@ use App\Http\Controllers\UserLikesController;
 use App\Http\Controllers\UserMediaController;
 use App\Http\Controllers\UserUtilsController;
 use App\Http\Controllers\VerifiedController;
+use App\Models\AppUser;
 use App\Models\UserLikes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,8 @@ Route::post('get-user', [AppUserController::class, 'getUser']);
 Route::get('get-potential-users/{uid}', [AppUserController::class, 'getPotentialUsers']);
 // Route::get('get-potential-users/{uid}', [AppUserController::class, 'getPotentialUsers']);
 Route::get('get-all-user', [AppUserController::class, 'index']);
+Route::get('get-user-matches/{uid}', [AppUserController::class, 'userMatches']);
+Route::get('get-user-likers/{uid}', [AppUserController::class, 'userLikers']);
 
 //User About Routes
 Route::get('user-about', [UserAboutController::class, 'index']);
@@ -104,6 +107,8 @@ Route::get('get-matches/{uid}', [MatchesController::class, 'getMatches']);
 
 //Chat and Chat Lists
 Route::post('create-chat',[ ChatController::class, 'store']);
+Route::get('get-chat-list/{uid}',[ ChatController::class, 'getChatList']);
+Route::get('get-chat-messages/{uid}/{withId}',[ ChatController::class, 'getChats']);
 
 //New Login route
 Route::post('check-and-login', [NewLoginController::class, 'newLogin']);
