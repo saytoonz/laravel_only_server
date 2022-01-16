@@ -54,7 +54,6 @@ class MatchesController extends Controller
 
     public function getMatches($uid)
     {
-
         return Matches::orWhere("user1",$uid)->orWhere('user2', $uid);
     }
 }

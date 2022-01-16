@@ -62,7 +62,11 @@ class ChatController extends Controller
                 $chatListItem->unread = $chatListItem->unread + 1;
                 $chatListItem->save();
             }
-            return $chat;
+            return response()->json([
+                'error' => false,
+                'msg' => 'success',
+                'data' => $chat,
+            ]);
         } catch (Exception $e) {
             return response()->json([
                 'error' => true,
@@ -108,9 +112,14 @@ class ChatController extends Controller
     {
         $response = array("error" => FALSE);
         try {
-            $chats = Chat::where('from', $uid)->orwhere('from', $withId)
-                ->where('to', $uid)->orwhere('to', $withId)->orderBy('created_at', 'DESC')
-                ->paginate(2);
+            $chats = Chat::where(function ($query) use ($uid, $withId) {
+                $query->where('from', $uid);
+                $query->orwhere('from', $withId);
+            })->where(function ($query) use ($uid, $withId) {
+                $query->where('to', $uid);
+                $query->orwhere('to', $withId);
+            })->orderBy('created_at', 'DESC')
+                ->paginate(20);
 
             $response["message"] = "success";
             $response["data"] = $chats;

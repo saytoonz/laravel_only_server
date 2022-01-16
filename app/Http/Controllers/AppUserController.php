@@ -17,6 +17,8 @@ use App\Http\Resources\UserResource;
 use App\Models\UserLikes;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\matches;
+
 class AppUserController extends Controller
 {
     public function index()
@@ -28,7 +30,18 @@ class AppUserController extends Controller
 
     public function getPotentialUsers($uid)
     {
-        return UserResource::collection(AppUser::where('id', '!=', $uid)->inRandomOrder()->paginate(100));
+
+        $likersList =  UserLikes::where('from', $uid)->pluck('to')->toArray();
+        $matches1 =  Matches::where('user1', $uid)->pluck('user2')->toArray();
+        $matches2 =  Matches::where('user2', $uid)->pluck('user1')->toArray();
+
+        return UserResource::collection(
+            AppUser::where('id', '!=', $uid)->where('active', 'yes')
+            ->whereNotIn('id', $likersList)
+            ->whereNotIn('id', $matches1)
+            ->whereNotIn('id', $matches2)
+            ->inRandomOrder()->paginate(100)
+        );
     }
 
 

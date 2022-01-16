@@ -15,4 +15,9 @@ class Chat extends Model
         'type',
         'status'
     ];
+
+    protected $casts = [
+        'to' => 'int',
+        'from' => 'int'
+    ];
 }
