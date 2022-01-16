@@ -34,7 +34,6 @@ class UserResource extends JsonResource
                 'created_at'=>$this->created_at,
             ],
             'user_about' => $this->about,
-            'user_utils' => $this->utils,
             'verified' => $this->verified,
             'premium' => $this->premium,
             'user_media' => $this->user_media,

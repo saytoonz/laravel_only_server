@@ -10,7 +10,6 @@ use App\Models\AppUser;
 use App\Models\Matches;
 use App\Models\UserAbout;
 use App\Models\UserMedia;
-use App\Models\UserUtils;
 use App\Models\Verified;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
@@ -266,13 +265,6 @@ class AppUserController extends Controller
             }
             $response["user_about"] = $user_about;
 
-            //Get user utils
-            $user_utils = UserUtils::where('uid', $uid)->get()->first();
-            if (!$user_utils) {
-                UserUtils::create(['uid' => $uid]);
-                $user_utils = UserUtils::where('uid', $uid)->get()->first();
-            }
-            $response["user_utils"] = $user_utils;
 
             //Get user current recommendation
             $recommendation = Recommendation::where('id', $in_use_recommendation)->get()->first();

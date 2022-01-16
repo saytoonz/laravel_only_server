@@ -37,10 +37,7 @@ class AppUser extends Model
     {
         return $this->hasOne(UserAbout::class, 'uid', 'id');
     }
-    public function utils()
-    {
-        return $this->hasOne(UserUtils::class, 'uid', 'id');
-    }
+
     public function verified()
     {
         return $this->hasOne(Verified::class, 'uid', 'id');
