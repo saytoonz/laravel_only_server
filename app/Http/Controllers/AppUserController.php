@@ -29,7 +29,6 @@ class AppUserController extends Controller
 
     public function getPotentialUsers($uid)
     {
-
         $likersList =  UserLikes::where('from', $uid)->pluck('to')->toArray();
         $matches1 =  Matches::where('user1', $uid)->pluck('user2')->toArray();
         $matches2 =  Matches::where('user2', $uid)->pluck('user1')->toArray();
