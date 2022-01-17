@@ -97,8 +97,8 @@ Your friend $request->recommender_fname $request->recommender_sname has recommen
 
 Kindly register with the code: $sms_code
 
-App Store: https://stackoverflow.com
-Google Play: https://stackoverflow.com";
+App Store: https://testflight.apple.com/join/YX7oAjyZ
+Google Play: N/A";
 
 
 
