@@ -93,9 +93,9 @@ class RecommendationController extends Controller
         if ($dbResponse) {
             $smsMessage = "You are a trusted friend $request->friend_name!
 
-Your friend $request->recommender_fname $request->recommender_sname has recommended you to join the app ONLY!, where only users that have been recommended by friends are allowed to join. That way we get the best community of users! Or as we like to say - only good people. Kindly follow the link below to join.
+Your friend $request->recommender_fname $request->recommender_sname has recommended you to join the new and innovative dating app ONLY!, where only users that have been recommended by friends are allowed to join. That way we get the best community of users! Or as we like to say - only good people. Kindly follow the link below to join.
 
-Kindly register with the code: $sms_code
+Kindly register with this SMS code: $sms_code
 
 App Store: https://testflight.apple.com/join/YX7oAjyZ
 Google Play: N/A";

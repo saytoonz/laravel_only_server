@@ -28,6 +28,9 @@ class ChatController extends Controller
             ]);
         }
         try {
+            $request['status'] = "SENT";
+            $request['created_at'] = NULL;
+            $request['updated_at'] = NULL;
             $chat =  Chat::create($request->all());
             if ($chat) {
                 ChatList::updateOrCreate(
@@ -41,7 +44,8 @@ class ChatController extends Controller
                         'from' => request('from'),
                         'message' => request('message'),
                         'type' => request('type'),
-                        'status' => request('status'),
+                        'status' => "SENT",
+
                     ],
                 );
 
@@ -56,7 +60,7 @@ class ChatController extends Controller
                         'from' => request('to'),
                         'message' => request('message'),
                         'type' => request('type'),
-                        'status' => request('status'),
+                        'status' => "SENT",
                     ],
                 );
                 $chatListItem->unread = $chatListItem->unread + 1;
@@ -108,7 +112,7 @@ class ChatController extends Controller
         return json_encode($response);
     }
 
-    public function getChats($uid, $withId)
+    public function getChats($uid, $withId, $quantity)
     {
         $response = array("error" => FALSE);
         try {
@@ -118,8 +122,20 @@ class ChatController extends Controller
             })->where(function ($query) use ($uid, $withId) {
                 $query->where('to', $uid);
                 $query->orwhere('to', $withId);
-            })->orderBy('created_at', 'DESC')
-                ->paginate(20);
+            })->orderBy('id', 'DESC')
+                ->paginate($quantity);
+
+            $list = ChatList::where('owner', $uid)->where('from', $uid)->orwhere('to', $uid)->get()->first();
+            $list->unread = 0;
+            $list->save();
+
+                for ($i=0; $i < count($chats); $i++) {
+                    $chat = $chats[$i];
+                    if($chat->status != "SEEN" && $chat->from != $uid){
+                        $chat->status = "SEEN";
+                        $chat->save();
+                    }
+                }
 
             $response["message"] = "success";
             $response["data"] = $chats;
@@ -131,4 +147,43 @@ class ChatController extends Controller
         }
         return json_encode($response);
     }
+
+
+
+public function getNewChats($uid, $withId, $lastId)
+{
+    $response = array("error" => FALSE);
+    try {
+        $chats = Chat::where('id', '>', $lastId)->where(function ($query) use ($uid, $withId) {
+            $query->where('from', $uid);
+            $query->orwhere('from', $withId);
+        })->where(function ($query) use ($uid, $withId) {
+            $query->where('to', $uid);
+            $query->orwhere('to', $withId);
+        })->orderBy('id', 'DESC')
+            ->paginate(100);
+
+            $list = ChatList::where('owner', $uid)->where('from', $uid)->orwhere('to', $uid)->get()->first();
+            $list->unread = 0;
+            $list->save();
+
+
+            for ($i=0; $i < count($chats); $i++) {
+                $chat = $chats[$i];
+                if($chat->status != "SEEN" && $chat->from != $uid){
+                    $chat->status = "SEEN";
+                    $chat->save();
+                }
+            }
+
+        $response["message"] = "success";
+        $response["data"] = $chats;
+        $response["error"] = false;
+    } catch (\Throwable $th) {
+        // throw $th;
+        $response["error"] = true;
+        $response["message"] = "Server error!";
+    }
+    return json_encode($response);
+}
 }

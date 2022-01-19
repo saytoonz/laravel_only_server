@@ -35,10 +35,26 @@ class AppUserController extends Controller
 
         return UserResource::collection(
             AppUser::where('id', '!=', $uid)->where('active', 'yes')
-            ->whereNotIn('id', $likersList)
-            ->whereNotIn('id', $matches1)
-            ->whereNotIn('id', $matches2)
-            ->inRandomOrder()->paginate(100)
+                ->whereNotIn('id', $likersList)
+                ->whereNotIn('id', $matches1)
+                ->whereNotIn('id', $matches2)
+                ->inRandomOrder()->paginate(1)
+        );
+    }
+
+    public function getDislikedPotentialUsers($uid)
+    {
+        $matches1 =  Matches::where('user1', $uid)->pluck('user2')->toArray();
+        $matches2 =  Matches::where('user2', $uid)->pluck('user1')->toArray();
+
+        $myLikes =  UserLikes::where('from', $uid)
+            ->whereNotIn('to', $matches1)
+            ->whereNotIn('to', $matches2)
+            ->where('isliked', 0)->pluck('to')->toArray();
+
+        return UserResource::collection(
+            AppUser::whereIn('id', $myLikes)
+                ->inRandomOrder()->paginate(1)
         );
     }
 
@@ -144,7 +160,7 @@ class AppUserController extends Controller
                     'uid' => $uid,
                     'city' => $user->city,
                     'country' => $user->country,
-                    'recommendations'=>$user->in_use_recommendation,
+                    'recommendations' => $user->in_use_recommendation,
                 ]);
             } else {
                 $response["error"] = FALSE;
@@ -312,12 +328,12 @@ class AppUserController extends Controller
     {
         $response = array("error" => FALSE);
         try {
-            $matches = Matches::where('user1',$uid)->orwhere('user2', $uid)->orderBy('created_at','DESC')->get();
+            $matches = Matches::where('user1', $uid)->orwhere('user2', $uid)->orderBy('created_at', 'DESC')->get();
 
             $data = [];
 
             foreach ($matches as $key => $value) {
-                $userId = $value->user1 != $uid ? $value->user1: $value->user2;
+                $userId = $value->user1 != $uid ? $value->user1 : $value->user2;
                 $data[] = [
                     'match' => $value,
                     'appUser' => UserResource::collection(AppUser::where('id', $userId)->get())->first(),
@@ -326,10 +342,10 @@ class AppUserController extends Controller
 
             $response["message"] = "success";
             $response["data"] = $data;
-            $response["error"] =false;
+            $response["error"] = false;
         } catch (\Throwable $th) {
             // throw $th;
-            $response["error"] =true;
+            $response["error"] = true;
             $response["message"] = "Server error!";
         }
         return json_encode($response);
@@ -341,13 +357,13 @@ class AppUserController extends Controller
     {
         $response = array("error" => FALSE);
         try {
-            $likers = UserLikes::where('to',$uid)->where('isliked', 1)->orderBy('created_at','DESC')->get();
+            $likers = UserLikes::where('to', $uid)->where('isliked', 1)->orderBy('created_at', 'DESC')->get();
 
             $data = [];
 
             foreach ($likers as $key => $value) {
-                $liked = UserLikes::where('to',$value->from)->where('from', $uid)->get()->first();
-                if($liked == null){
+                $liked = UserLikes::where('to', $value->from)->where('from', $uid)->get()->first();
+                if ($liked == null) {
                     $data[] = [
                         'like' => $value,
                         'appUser' => UserResource::collection(AppUser::where('id', $value->from)->get())->first(),
@@ -357,10 +373,10 @@ class AppUserController extends Controller
 
             $response["message"] = "success";
             $response["data"] = $data;
-            $response["error"] =false;
+            $response["error"] = false;
         } catch (\Throwable $th) {
             // throw $th;
-            $response["error"] =true;
+            $response["error"] = true;
             $response["message"] = "Server error!";
         }
         return json_encode($response);

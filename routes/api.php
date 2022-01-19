@@ -40,7 +40,7 @@ Route::post('update-user-with-column-value', [AppUserController::class, 'updateW
 Route::delete('users/{id}', [AppUserController::class, 'destroy']);
 Route::post('get-user', [AppUserController::class, 'getUser']);
 Route::get('get-potential-users/{uid}', [AppUserController::class, 'getPotentialUsers']);
-// Route::get('get-potential-users/{uid}', [AppUserController::class, 'getPotentialUsers']);
+Route::get('get-disliked-potential-users/{uid}', [AppUserController::class, 'getDislikedPotentialUsers']);
 Route::get('get-all-user', [AppUserController::class, 'index']);
 Route::get('get-user-matches/{uid}', [AppUserController::class, 'userMatches']);
 Route::get('get-user-likers/{uid}', [AppUserController::class, 'userLikers']);
@@ -108,7 +108,8 @@ Route::get('get-matches/{uid}', [MatchesController::class, 'getMatches']);
 //Chat and Chat Lists
 Route::post('create-chat',[ ChatController::class, 'store']);
 Route::get('get-chat-list/{uid}',[ ChatController::class, 'getChatList']);
-Route::get('get-chat-messages/{uid}/{withId}',[ ChatController::class, 'getChats']);
+Route::get('get-chat-messages/{uid}/{withId}/{quantity}',[ ChatController::class, 'getChats']);
+Route::get('get-new-chat-messages/{uid}/{withId}/{lastId}',[ ChatController::class, 'getNewChats']);
 
 //New Login route
 Route::post('check-and-login', [NewLoginController::class, 'newLogin']);
