@@ -38,7 +38,7 @@ class UserResource extends JsonResource
             'premium' => $this->premium,
             'user_media' => $this->user_media,
             'notifications' => $this->notifications,
-            'recommendation'=>$this->recommendation,
+            'recommendations'=>$this->recommendation->where('active', "used"),
             'userLikes'=>$this->userLikes->where('from', '!=', $this->id),
         ];
     }

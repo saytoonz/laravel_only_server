@@ -27,7 +27,8 @@ class AppUser extends Model
         'age_range',
         'in_use_recommendation',
         'last_update',
-        'current_address'
+        'current_address',
+        'max_km_distance'
     ];
     protected $casts = [
         'current_address' => 'array'
@@ -56,7 +57,7 @@ class AppUser extends Model
     }
     public function recommendation()
     {
-        return $this->hasOne(Recommendation::class, 'id', 'in_use_recommendation');
+        return $this->hasMany(Recommendation::class, 'used_by', 'id');
     }
     public function userLikes()
     {

@@ -99,8 +99,11 @@ Route::post('create-rec', [RecommendationController::class, 'store']);
 Route::get('recs/{id}', [RecommendationController::class, 'show']);
 Route::post('update-recs/{id}', [RecommendationController::class, 'update']);
 Route::delete('recs/{id}', [RecommendationController::class, 'destroy']);
+Route::post('accept-recommendation', [RecommendationController::class, 'acceptARecommendation']);
 Route::post('reject-recommendation', [RecommendationController::class, 'rejectARecommendation']);
+Route::post('delete-recommendation', [RecommendationController::class, 'deleteAcceptedRec']);
 Route::post('get-rec-with-smscode', [RecommendationController::class, 'getRecBySMSCode']);
+Route::post('request-recommendation', [RecommendationController::class, 'requestRecommendation']);
 
 //Matched
 Route::get('get-matches/{uid}', [MatchesController::class, 'getMatches']);

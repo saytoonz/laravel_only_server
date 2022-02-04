@@ -22,28 +22,34 @@ class AppUserController extends Controller
 {
     public function index()
     {
-        // return new UserResource(AppUser::find(1));
         return UserResource::collection(AppUser::all());
     }
 
 
     public function getPotentialUsers($uid)
     {
+        $loggedInUser = AppUser::find($uid);
+
         $likersList =  UserLikes::where('from', $uid)->pluck('to')->toArray();
         $matches1 =  Matches::where('user1', $uid)->pluck('user2')->toArray();
         $matches2 =  Matches::where('user2', $uid)->pluck('user1')->toArray();
+
+        $lookingFor = $loggedInUser->looking_for == "Men" ? "Man" : ($loggedInUser->looking_for == "Women" ? "Woman" : "both");
+
 
         return UserResource::collection(
             AppUser::where('id', '!=', $uid)->where('active', 'yes')
                 ->whereNotIn('id', $likersList)
                 ->whereNotIn('id', $matches1)
                 ->whereNotIn('id', $matches2)
-                ->inRandomOrder()->paginate(1)
+                ->inRandomOrder()->paginate(100)
         );
     }
 
     public function getDislikedPotentialUsers($uid)
     {
+        $loggedInUser = AppUser::find($uid);
+
         $matches1 =  Matches::where('user1', $uid)->pluck('user2')->toArray();
         $matches2 =  Matches::where('user2', $uid)->pluck('user1')->toArray();
 
@@ -259,7 +265,7 @@ class AppUserController extends Controller
         $user = AppUser::where($request->selector, $request->value)->get()->first();
         if ($user) {
             $uid = $user['id'];
-            $in_use_recommendation = $user['in_use_recommendation'];
+            $phone = $user['phone'];
             $response["error"] = FALSE;
             $response["user"] = $user;
 
@@ -282,8 +288,8 @@ class AppUserController extends Controller
 
 
             //Get user current recommendation
-            $recommendation = Recommendation::where('id', $in_use_recommendation)->get()->first();
-            $response["recommendation"] = $recommendation;
+            $recommendations = Recommendation::where('friend_phone', $phone)->where("active", "!=", "del")->limit(5)->get();
+            $response["recommendations"] = $recommendations;
 
             //Get user Verified
             $verified = Verified::where('uid', $uid)->get()->first();
@@ -298,7 +304,7 @@ class AppUserController extends Controller
             if (!$premium) {
                 Premium::create([
                     'uid' => $uid,
-                    'recommendations' => $recommendation['id'],
+                    'recommendations' => $user['in_use_recommendation'],
                     'country' => $user['country'],
                     'city' => $user['city'],
                 ]);

@@ -6,6 +6,7 @@ use App\Models\AppUser;
 use App\Models\Recommendation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Validator;
 
 class RecommendationController extends Controller
 {
@@ -21,17 +22,68 @@ class RecommendationController extends Controller
         return Recommendation::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+    public function requestRecommendation(Request $request)
+    {
+        $response = array("error" => FALSE);
+
+        $validator = Validator::make($request->all(), [
+            'uid' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'phone' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'msg' => 'Required parameters missing...',
+            ]);
+        }
+
+        //Send Sms here....
+        try {
+
+            $user = AppUser::find($request->uid);
+
+            if ($user) {
+                $pronoun = "him";
+                $pronoun2 = "his";
+                if($user->gender == "Woman"){
+                   $pronoun = "her";
+                   $pronoun2 = "her";
+                }
+                $smsMessage = "Oh Yes! $request->first_name.
+
+Your friend $user->first_name $user->last_name has invited you to recommend $pronoun on ONLY!
+
+Download the app from the below link and select «Recommend» a friend to recommend $pronoun using $pronoun2 contact number $user->phone.
+
+App Store: https://testflight.apple.com/join/YX7oAjyZ
+Google Play: N/A
+
+Thank you! The Only Team";
+
+                $response["error"] = FALSE;
+                $response["msg"] = "Request sent to $request->first_name successfully.";
+                $response["smsResp"] = $this->sendSMS($request->phone,  $smsMessage);
+            } else {
+                $response["error"] = TRUE;
+                $response["msg"] = "Sorry, we could not identify your account.";
+            }
+        } catch (\Throwable $th) {
+            $response["error"] = TRUE;
+            //Use message from the top
+        }
+        return json_encode($response);
+    }
+
+
     public function store(Request $request)
     {
         $response = array("error" => FALSE);
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'recommender_fname' => 'required',
             'recommender_sname' => 'required',
             'recommender_phone' => 'required',
@@ -43,6 +95,13 @@ class RecommendationController extends Controller
             'conversation_open' => 'required',
             'recording_path' => 'required',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'msg' => 'Required parameters missing...',
+            ]);
+        }
 
         if (AppUser::where('phone', $request->friend_phone)->get()->first()) {
             $response["error"] = TRUE;
@@ -144,6 +203,89 @@ Google Play: N/A";
         return $rec;
     }
 
+
+
+    public function acceptARecommendation(Request $request)
+    {
+        $response = array("error" => FALSE);
+
+        $validator = Validator::make($request->all(), [
+            'smscode' => 'required',
+            'phone' => 'required',
+            'uid' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'msg' => 'Required parameters missing...',
+            ]);
+        }
+
+        try {
+            $recommended = Recommendation::where('sms_code', $request->smscode)
+                ->where('friend_phone', $request->phone)
+                ->where('active', 'yes')->get()->first();
+            if ($recommended != null) {
+                $recommended->used_by = $request->uid;
+                $recommended->active = "used";
+                $recommended->save();
+
+                $response["error"] = FALSE;
+                $response["msg"] = "done";
+                $response["recommendation"] = $recommended;
+            } else {
+                $response["error"] = TRUE;
+                $response["msg"] = "Sms code has been revoked or does not exist!";
+            }
+        } catch (\Throwable $th) {
+            $response["error"] = TRUE;
+            $response["msg"] = "Sorry an error occurred, please try again.";
+        }
+        return json_encode($response);
+    }
+
+
+
+    public function deleteAcceptedRec(Request $request)
+    {
+
+        $response = array("error" => FALSE);
+
+        $validator = Validator::make($request->all(), [
+            'smscode' => 'required',
+            'phone' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'msg' => 'Required parameters missing...',
+            ]);
+        }
+
+        try {
+            $recommended = Recommendation::where('sms_code', $request->smscode)
+                ->where('friend_phone', $request->phone)
+                ->where('active', 'used')->get()->first();
+            if ($recommended != null) {
+                $recommended->active = "del";
+                $recommended->save();
+
+                $response["error"] = FALSE;
+                $response["msg"] = "done";
+                $response["recommendation"] = $recommended;
+            } else {
+                $response["error"] = TRUE;
+                $response["msg"] = "Sms code has been revoked or does not exist!";
+            }
+        } catch (\Throwable $th) {
+            $response["error"] = TRUE;
+            $response["msg"] = "Sorry an error occurred, please try again.";
+        }
+        return json_encode($response);
+    }
+
     public function generateRandomString($length = 10)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -169,13 +311,20 @@ Google Play: N/A";
 
     public function rejectARecommendation(Request $request)
     {
-        $response = array("error" => FALSE);
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'smscode' => 'required',
             'phone' => 'required',
         ]);
 
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => true,
+                'msg' => 'Required parameters missing...',
+            ]);
+        }
+
+        $response = array("error" => FALSE);
         $recommended = Recommendation::where('sms_code', $request->smscode)
             ->where('friend_phone', $request->phone)
             ->where('active', 'yes')->get()->first();

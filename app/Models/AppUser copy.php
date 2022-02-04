@@ -49,7 +49,7 @@ class AppUser extends Model
         return $this->hasOne(Notification::class, 'uid', 'id');
     }
     public function recommendation(){
-        return $this->hasOne(Recommendation::class, 'used_by', 'id');
+        return $this->hasMany(Recommendation::class, 'used_by', 'id');
     }
     public function userLikes(){
         return $this->hasMany(UserLikes::class, 'from');
