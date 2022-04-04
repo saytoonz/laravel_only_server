@@ -140,6 +140,7 @@ Thank you! The Only Team";
                 'why_great' => $request->why_great,
                 'conversation_open' => $request->conversation_open,
                 'recording_path' => $request->recording_path,
+                'recording_duration' => $request->recording_duration,
                 'sms_code' => $sms_code,
             ]);
             $response["msg"] = "Unknown error occurred while adding recommendation...";

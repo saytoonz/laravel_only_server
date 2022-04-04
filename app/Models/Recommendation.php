@@ -19,6 +19,7 @@ class Recommendation extends Model
         'why_great',
         'conversation_open',
         'recording_path',
+        'recording_duration',
         'sms_code',
         'used_by',
         'date_used',
