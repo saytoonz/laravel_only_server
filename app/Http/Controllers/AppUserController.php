@@ -342,7 +342,6 @@ class AppUserController extends Controller
 
             foreach ($matches as $key => $value) {
                 $userId = $value->user1 != $uid ? $value->user1 : $value->user2;
-                // $chatList = ChatList::where('owner', $uid)->where('from', $userId)->orwhere('to', $userId)->get()->first();
                 $chatList = ChatList::where('owner', $uid)->where(function ($query) use ($uid, $userId) {
                     $query->where('from', $uid);
                     $query->orwhere('from', $userId);
