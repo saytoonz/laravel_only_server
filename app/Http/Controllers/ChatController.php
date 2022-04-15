@@ -126,8 +126,10 @@ class ChatController extends Controller
                 ->paginate($quantity);
 
             $list = ChatList::where('owner', $uid)->where('from', $withId)->orwhere('to', $withId)->get()->first();
-            $list->unread = 0;
-            $list->save();
+             if($list){
+                $list->unread = 0;
+                $list->save();
+            }
 
                 for ($i=0; $i < count($chats); $i++) {
                     $chat = $chats[$i];
@@ -164,8 +166,10 @@ public function getNewChats($uid, $withId, $lastId)
             ->paginate(100);
 
             $list = ChatList::where('owner', $uid)->where('from', $withId)->orwhere('to', $withId)->get()->first();
-            $list->unread = 0;
-            $list->save();
+            if($list){
+                $list->unread = 0;
+                $list->save();
+            }
 
 
             for ($i=0; $i < count($chats); $i++) {
