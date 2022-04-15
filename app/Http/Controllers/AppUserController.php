@@ -343,12 +343,12 @@ class AppUserController extends Controller
             foreach ($matches as $key => $value) {
                 $userId = $value->user1 != $uid ? $value->user1 : $value->user2;
                 $chatList = ChatList::where('owner', $uid)->where('from', $userId)->orwhere('to', $userId)->get()->first();
-                if(!$chatList){
+                // if(!$chatList){
                     $data[] = [
                         'match' => $value,
                         'appUser' => UserResource::collection(AppUser::where('id', $userId)->get())->first(),
                     ];
-                }
+                // }
 
             }
 
