@@ -13,6 +13,7 @@ use App\Models\UserMedia;
 use App\Models\Verified;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
+use App\Models\ChatList;
 use App\Models\UserLikes;
 use Illuminate\Support\Facades\DB;
 
@@ -338,12 +339,17 @@ class AppUserController extends Controller
 
             $data = [];
 
+
             foreach ($matches as $key => $value) {
                 $userId = $value->user1 != $uid ? $value->user1 : $value->user2;
-                $data[] = [
-                    'match' => $value,
-                    'appUser' => UserResource::collection(AppUser::where('id', $userId)->get())->first(),
-                ];
+                $chatList = ChatList::where('owner', $uid)->where('from', $userId)->orwhere('to', $userId)->get()->first();
+                if(!$chatList){
+                    $data[] = [
+                        'match' => $value,
+                        'appUser' => UserResource::collection(AppUser::where('id', $userId)->get())->first(),
+                    ];
+                }
+
             }
 
             $response["message"] = "success";
