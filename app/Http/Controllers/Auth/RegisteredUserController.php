@@ -13,7 +13,6 @@ use Illuminate\Validation\Rules;
 
 class RegisteredUserController extends Controller
 {
-
     /**
      * Display the registration view.
      *
