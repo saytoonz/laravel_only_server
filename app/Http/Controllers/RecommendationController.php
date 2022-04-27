@@ -383,15 +383,31 @@ The ONLY! Team";
     public function sendSMS($phone, $message)
     {
 
-        $apiURL = "https://apiv2.mycsms.com";
+        // $apiURL = "https://apiv2.mycsms.com";
+        // $postInput = [
+        //     'apiKey' => 'cSMS76b8512f69953562-d7c386f5bdb710ee',
+        //     'phone' => [$phone],
+        //     'sender' => 'ONLY',
+        //     'message' => $message,
+        // ];
+
+        // $headers = [];
+        // $resp = Http::withHeaders($headers)->post($apiURL, $postInput);
+        // // $statusCode = $response->status();
+        // $responseBody = json_decode($resp->getBody(), true);
+
+
+        $apiURL = "https://sms.arkesel.com/api/v2/sms/send";
         $postInput = [
-            'apiKey' => 'cSMS76b8512f69953562-d7c386f5bdb710ee',
-            'phone' => [$phone],
+
+            'recipients' => [$phone],
             'sender' => 'ONLY',
             'message' => $message,
         ];
 
-        $headers = [];
+        $headers = [
+             'api-key' => 'ZkRxc1NKVnFmRlZicFVhRVRka20',
+        ];
         $resp = Http::withHeaders($headers)->post($apiURL, $postInput);
         // $statusCode = $response->status();
         $responseBody = json_decode($resp->getBody(), true);
