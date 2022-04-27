@@ -405,7 +405,7 @@ The ONLY! Team";
             'message' => $message,
         ];
 
-        $headers = ['api-key' => 'ZkRxc1NKVnFmRlZicFVhRVRka20',];
+        $headers = ['api-key' => 'ZkRxc1NKVnFmRlZicFVhRVRka20'];
         $resp = Http::withHeaders($headers)->post($apiURL, $postInput);
         // $statusCode = $response->status();
         $responseBody = json_decode($resp->getBody(), true);
