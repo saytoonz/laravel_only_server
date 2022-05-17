@@ -31,4 +31,12 @@ Route::get('/new-users', [AdminController::class, 'newUsers'])->middleware(['aut
 Route::get('/all-users', [AdminController::class, 'allUsers'])->middleware(['auth'])->name("users");
 Route::get('/blocked-users', [AdminController::class, 'blockedUsers'])->middleware(['auth'])->name("users");
 
+
+Route::get('/new-matches', [AdminController::class, 'newMatches'])->middleware(['auth'])->name("matches");
+Route::get('/all-matches', [AdminController::class, 'allMatches'])->middleware(['auth'])->name("matches");
+
+
+Route::get('/new-likes', [AdminController::class, 'newLikes'])->middleware(['auth'])->name("likes");
+Route::get('/all-likes', [AdminController::class, 'allLikes'])->middleware(['auth'])->name("likes");
+
 require __DIR__.'/auth.php';

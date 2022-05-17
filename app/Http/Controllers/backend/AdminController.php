@@ -74,22 +74,6 @@ class AdminController extends Controller
 
 
 
-    //! Reports
-    public function reports()
-    {
-        $reports = DB::table('app_user_reports')->where("active", "yes")->orderByDesc('id')->paginate(20);
-        foreach ($reports as  $rep) {
-            $rep->reporter = DB::table('app_users')->where('id', $rep->reporter)->first();
-            $rep->reported = DB::table('app_users')->where('id', $rep->reported)->first();
-        }
-
-        return view(
-            'backend.reports',
-            [
-                "reports"=>$reports,
-            ]
-        );
-    }
 
 
     //!  Verifications
@@ -184,4 +168,93 @@ class AdminController extends Controller
             );
     }
 
+
+    //! Matches
+    public function newMatches()
+    {
+        $matches = DB::table('matches')->whereMonth('created_at', date('m'))->orderByDesc('id')->paginate(20);
+        foreach ($matches as  $rep) {
+            $rep->user1 = DB::table('app_users')->where('id', $rep->user1)->first();
+            $rep->user2 = DB::table('app_users')->where('id', $rep->user2)->first();
+        }
+
+        return view(
+            'backend.matches.new-matches',
+            [
+                "matches"=>$matches,
+            ]
+        );
+    }
+    public function allMatches()
+    {
+        $matches = DB::table('matches')->orderByDesc('id')->paginate(20);
+        foreach ($matches as  $rep) {
+            $rep->user1 = DB::table('app_users')->where('id', $rep->user1)->first();
+            $rep->user2 = DB::table('app_users')->where('id', $rep->user2)->first();
+        }
+
+        return view(
+            'backend.matches.all-matches',
+            [
+                "matches"=>$matches,
+            ]
+        );
+    }
+
+
+
+
+ //! Likes
+ public function newLikes()
+ {
+     $likes = DB::table('user_likes')->whereMonth('created_at', date('m'))->orderByDesc('id')->paginate(20);
+     foreach ($likes as  $rep) {
+         $rep->user1 = DB::table('app_users')->where('id', $rep->from)->first();
+         $rep->user2 = DB::table('app_users')->where('id', $rep->to)->first();
+     }
+
+     return view(
+         'backend.likes.new-likes',
+         [
+             "likes"=>$likes,
+         ]
+     );
+ }
+
+  public function allLikes()
+  {
+      $likes = DB::table('user_likes')->orderByDesc('id')->paginate(20);
+      foreach ($likes as  $rep) {
+          $rep->user1 = DB::table('app_users')->where('id', $rep->from)->first();
+          $rep->user2 = DB::table('app_users')->where('id', $rep->to)->first();
+      }
+
+      return view(
+          'backend.likes.all-likes',
+          [
+              "likes"=>$likes,
+          ]
+      );
+  }
+
+
+
+
+
+    //! Reports
+    public function reports()
+    {
+        $reports = DB::table('app_user_reports')->where("active", "yes")->orderByDesc('id')->paginate(20);
+        foreach ($reports as  $rep) {
+            $rep->reporter = DB::table('app_users')->where('id', $rep->reporter)->first();
+            $rep->reported = DB::table('app_users')->where('id', $rep->reported)->first();
+        }
+
+        return view(
+            'backend.reports',
+            [
+                "reports"=>$reports,
+            ]
+        );
+    }
 }

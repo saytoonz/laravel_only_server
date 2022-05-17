@@ -36,16 +36,16 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa  fa-check-square-o"></i>Matches</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa  fa-check-square-o"></i><a href="ui-switches.html">New Matches</a></li>
-                        <li><i class="fa  fa-check-square"></i><a href="ui-grids.html">All Matches</a></li>
+                        <li><i class="fa  fa-check-square-o"></i><a href="{{url('new-matches')}}">New Matches</a></li>
+                        <li><i class="fa  fa-check-square"></i><a href="{{url('all-matches')}}">All Matches</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa  fa-thumbs-up"></i>Likes</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa  fa-thumbs-o-up"></i><a href="ui-switches.html">New Likes</a></li>
-                        <li><i class="fa fa-thumbs-up"></i><a href="ui-grids.html">All Likes</a></li>
+                        <li><i class="fa  fa-thumbs-o-up"></i><a href="{{url('new-likes')}}">New Likes</a></li>
+                        <li><i class="fa fa-thumbs-up"></i><a href="{{url('all-likes')}}">All Likes</a></li>
                     </ul>
                 </li>
 
