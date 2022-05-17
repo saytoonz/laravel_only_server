@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    //
+    public function admin()
+    {
+        //the body of the function
+    }
 }
