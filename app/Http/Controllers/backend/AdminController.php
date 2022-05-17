@@ -4,11 +4,184 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
+    //! Dashboard
     public function admin()
     {
-        //the body of the function
+        $totalAppUsers = DB::table('app_users')->count();
+        $appUsersThisMonth = DB::table('app_users')->whereMonth('created_at', date('m'))->count();
+
+        $matches = DB::table('matches')->count();
+        $userLikes = DB::table('user_likes')->where("isliked", 1)->count();
+
+        $countries = DB::table('app_users')->select(DB::raw('DISTINCT country, COUNT(*) AS counts'))->groupBy('country')->orderBy('counts', 'desc')->get();
+
+        $usersList = [];
+        $matchesList = [];
+        $likesList = [];
+        for ($month = 1; $month <= 12; $month++) {
+            $date = \Carbon\Carbon::create(date('Y'), $month);
+            $date_end = $date->copy()->endOfMonth();
+
+            $a = DB::table('app_users')
+           -> where('created_at', '>=', $date)
+           ->where('created_at', '<=', $date_end)->count();
+            array_push($usersList, $a);
+
+            $b = DB::table('matches')
+           -> where('created_at', '>=', $date)
+           ->where('created_at', '<=', $date_end)->count();
+           array_push($matchesList, $b);
+
+           $c = DB::table('user_likes')
+           -> where('created_at', '>=', $date)
+           ->where('created_at', '<=', $date_end)->count();
+           array_push($likesList, $c);
+        }
+
+
+
+        $verified = DB::table('verified')->where("status", "Pending")->where("image", "!=" , NULL)->orderByDesc('id')->limit(5)->get();
+        foreach ($verified as  $ver) {
+            $ver->theUser = DB::table('app_users')->where('id', $ver->uid)->first();
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->uid)->first();
+        }
+
+        $verifiedSize = DB::table('verified')->where("status", "Verified")->count();
+
+        return view(
+            'backend.dashboard',
+            [
+                'totalAppUsers' => $totalAppUsers,
+                'appUsersThisMonth' => $appUsersThisMonth,
+                "matches" => $matches,
+                "userLikes" => $userLikes,
+
+                "usersList"=>$usersList,
+                "matchesList"=>$matchesList,
+                "likesList"=>$likesList,
+
+                "countries"=> $countries,
+                "verified"=>$verified,
+                "verifiedSize"=>$verifiedSize,
+            ]
+            );
     }
+
+
+
+    //! Reports
+    public function reports()
+    {
+        $reports = DB::table('app_user_reports')->where("active", "yes")->orderByDesc('id')->paginate(20);
+        foreach ($reports as  $rep) {
+            $rep->reporter = DB::table('app_users')->where('id', $rep->reporter)->first();
+            $rep->reported = DB::table('app_users')->where('id', $rep->reported)->first();
+        }
+
+        return view(
+            'backend.reports',
+            [
+                "reports"=>$reports,
+            ]
+        );
+    }
+
+
+    //!  Verifications
+    public function newVerification()
+    {
+        $verified = DB::table('verified')->where("status", "Pending")->where("image", "!=" , NULL)->orderByDesc('id')->paginate(20);
+        foreach ($verified as  $ver) {
+            $ver->theUser = DB::table('app_users')->where('id', $ver->uid)->first();
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->uid)->first();
+        }
+
+        return view(
+            'backend.verification.new-verification',
+            [
+                "verified"=>$verified,
+            ]
+            );
+    }
+    public function verified()
+    {
+        $verified = DB::table('verified')->where("status", "Verified")->orderByDesc('id')->paginate(20);
+        foreach ($verified as  $ver) {
+            $ver->theUser = DB::table('app_users')->where('id', $ver->uid)->first();
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->uid)->first();
+        }
+
+        return view(
+            'backend.verification.verified',
+            [
+                "verified"=>$verified,
+            ]
+            );
+    }
+
+    public function verificationRejected()
+    {
+        $verified = DB::table('verified')->where("status", "Rejected")->orderByDesc('id')->paginate(20);
+        foreach ($verified as  $ver) {
+            $ver->theUser = DB::table('app_users')->where('id', $ver->uid)->first();
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->uid)->first();
+        }
+
+        return view(
+            'backend.verification.rejected',
+            [
+                "verified"=>$verified,
+            ]
+            );
+    }
+
+    //! Users
+    public function newUsers()
+    {
+        $users = DB::table('app_users')->where("active", "yes")->whereMonth('created_at', date('m'))->orderByDesc('id')->paginate(20);
+        foreach ($users as  $ver) {
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->id)->first();
+        }
+
+        return view(
+            'backend.users.new-user',
+            [
+                "users"=>$users,
+            ]
+            );
+    }
+     public function allUsers()
+    {
+        $users = DB::table('app_users')->where("active", "yes")->orderByDesc('id')->paginate(20);
+        foreach ($users as  $ver) {
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->id)->first();
+        }
+
+        return view(
+            'backend.users.all-user',
+            [
+                "users"=>$users,
+            ]
+            );
+    }
+    public function blockedUsers()
+    {
+        $users = DB::table('app_users')->where("active", "!=", "yes")->orderByDesc('id')->paginate(20);
+        foreach ($users as  $ver) {
+            $ver->userMedia = DB::table('user_media')->where('uid', $ver->id)->first();
+        }
+
+        return view(
+            'backend.users.blocked-user',
+            [
+                "users"=>$users,
+            ]
+            );
+    }
+
 }
