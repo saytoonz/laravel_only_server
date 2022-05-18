@@ -275,4 +275,58 @@ class AdminController extends Controller
         ]
        );
     }
+
+    //! View user
+    public function viewUser($id){
+        $user = DB::table('app_users')->where('id', $id)->first();
+        $userAbout = DB::table('user_about')->where('uid', $id)->first();
+        $userMedia = DB::table('user_media')->where('uid', $id)->first();
+        $userRecs = DB::table('recommendations')->where('used_by', $id)->get();
+        $verification = DB::table('verified')->where('uid', $id)->first();
+        return view(
+            "backend.user",
+            [
+                "user"=>$user,
+                "userMedia"=>$userMedia,
+                "userRecs"=>$userRecs,
+                "verification"=>$verification,
+                "userAbout"=>$userAbout,
+
+            ]
+        );
+    }
+
+    //!
+    public function userMatches($uid)
+    {
+        $user = DB::table('app_users')->where('id', $uid)->first();
+        $matches = DB::table('matches')->orWhere("user1",$uid)->orWhere('user2', $uid)->orderByDesc('id')->paginate(20);
+
+        foreach ($matches as  $rep) {
+            $rep->user1 = DB::table('app_users')->where('id', $rep->user1)->first();
+            $rep->user2 = DB::table('app_users')->where('id', $rep->user2)->first();
+        }
+
+        return view(
+            'backend.user-matches',
+            [
+                "user"=>$user,
+                "matches"=>$matches,
+            ]
+        );
+    }
+
+
+
+
+    public function updateWithApi($tbl, $id, $field,  $value)
+    {
+        try {
+            DB::table($tbl)->where('id', $id)->update([$field => $value]);
+            return $id;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return 0;
+        }
+    }
 }
