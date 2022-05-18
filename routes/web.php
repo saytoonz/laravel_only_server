@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,8 +41,12 @@ Route::get('/new-likes', [AdminController::class, 'newLikes'])->middleware(['aut
 Route::get('/all-likes', [AdminController::class, 'allLikes'])->middleware(['auth'])->name("likes");
 
 
-
 Route::get('/verify-user/{id}', [AdminController::class, 'verifyPage'])->middleware(['auth'])->name("view");
 Route::get('/view-user/{id}', [AdminController::class, 'viewUser'])->middleware(['auth'])->name("view");
+Route::get('/user-matches/{id}', [AdminController::class, 'userMatches'])->middleware(['auth'])->name("view");
+
+Route::get('update-api/{tbl}/{id}/{field}/{value}', [AdminController::class, 'updateWithApi'])->middleware(['auth'])->name("update");
+
+Route::get('logout', [HomeController::class, 'logout']);
 
 require __DIR__.'/auth.php';
