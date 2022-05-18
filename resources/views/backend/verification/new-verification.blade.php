@@ -44,7 +44,9 @@
                                                 <td><span class="">{{ $item->theUser->created_at }}</span></td>
                                                 <td><span class="">{{ $item->created_at }}</span></td>
                                                 <td>
-                                                    <span class="badge badge-complete">View</span>
+                                                    <a href="{{url("verify-user")}}/{{$item->uid}}">
+                                                         <span class="badge badge-complete">View</span>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @endforeach
