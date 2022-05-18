@@ -257,4 +257,22 @@ class AdminController extends Controller
             ]
         );
     }
+
+
+
+    //! verify user page
+    public function verifyPage($id)
+    {
+        $user = DB::table('app_users')->where('id', $id)->first();
+        $user->userMedia = DB::table('user_media')->where('uid', $id)->first();
+
+        $verification = DB::table('verified')->where('uid', $id)->first();
+       return view(
+        'backend.verify',
+        [
+            "user"=>$user,
+            "verification"=>$verification,
+        ]
+       );
+    }
 }
