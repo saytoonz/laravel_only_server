@@ -30,8 +30,16 @@
                                             @foreach ($reports as $key=>$item)
                                             <tr>
                                                 <td class="serial">{{$key+1}}.</td>
-                                                <td> <span class="name">{{ $item->reporter->first_name}} {{ $item->reporter->last_name }}</span> </td>
-                                                <td> <span class="name">{{ $item->reported->first_name}} {{ $item->reported->last_name }}</span> </td>
+                                               <td>
+                                                    <a href="{{url("view-user")}}/{{ $item->reporter->id}}">
+                                                        <span class="name">{{ $item->reporter->first_name}} {{ $item->reporter->last_name }}</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{url("view-user")}}/{{ $item->reported->id }}">
+                                                        <span class="name">{{ $item->reported->first_name}} {{ $item->reported->last_name }}</span>
+                                                    </a>
+                                                </td>
                                                 <td> <span class="name">{{ $item->report}}</span> </td>
                                                 <td><span class="">{{ $item->created_at }}</span></td>
                                                 <td>
