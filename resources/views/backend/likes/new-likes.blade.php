@@ -28,8 +28,16 @@
                                             @foreach ($likes as $key=>$item)
                                             <tr>
                                                 <td class="serial">{{$key+1}}.</td>
-                                                <td> <span class="name">{{ $item->user1->first_name}} {{ $item->user1->last_name }}</span> </td>
-                                                <td> <span class="name">{{ $item->user2->first_name}} {{ $item->user2->last_name }}</span> </td>
+                                                <td>
+                                                    <a href="{{url("view-user")}}/{{ $item->user1->id}}">
+                                                        <span class="name">{{ $item->user1->first_name}} {{ $item->user1->last_name }}</span>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="{{url("view-user")}}/{{ $item->user2->id }}">
+                                                        <span class="name">{{ $item->user2->first_name}} {{ $item->user2->last_name }}</span>
+                                                    </a>
+                                                </td>
                                                 <td><span class="">{{ $item->created_at }}</span></td>
                                             </tr>
                                             @endforeach
