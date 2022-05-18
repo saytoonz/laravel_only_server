@@ -46,7 +46,9 @@
                                                 <td><span class="">{{ $item->gender }}</span></td>
                                                 <td><span class="">{{ $item->created_at }}</span></td>
                                                 <td>
-                                                    <span class="badge badge-complete">View</span>
+                                                    <a href="{{url("view-user")}}/{{ $item->id}}">
+                                                        <span class="badge badge-complete">View</span>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @endforeach
