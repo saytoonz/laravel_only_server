@@ -39,4 +39,9 @@ Route::get('/all-matches', [AdminController::class, 'allMatches'])->middleware([
 Route::get('/new-likes', [AdminController::class, 'newLikes'])->middleware(['auth'])->name("likes");
 Route::get('/all-likes', [AdminController::class, 'allLikes'])->middleware(['auth'])->name("likes");
 
+
+
+Route::get('/verify-user/{id}', [AdminController::class, 'verifyPage'])->middleware(['auth'])->name("view");
+Route::get('/view-user/{id}', [AdminController::class, 'viewUser'])->middleware(['auth'])->name("view");
+
 require __DIR__.'/auth.php';
