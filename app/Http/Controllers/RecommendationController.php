@@ -110,11 +110,11 @@ Thank you! The Only Team";
             ]);
         }
 
-        if (AppUser::where('phone', $request->friend_phone)->get()->first()) {
-            $response["error"] = TRUE;
-            $response["msg"] = "Sorry, this user is already active on  ONLY!.";
-            return json_encode($response);
-        }
+        // if (AppUser::where('phone', $request->friend_phone)->get()->first()) {
+        //     $response["error"] = TRUE;
+        //     $response["msg"] = "Sorry, this user is already active on  ONLY!.";
+        //     return json_encode($response);
+        // }
 
         if ($request->recommender_phone == $request->friend_phone) {
             $response["error"] = TRUE;
