@@ -28,7 +28,8 @@ class AppUser extends Model
         'in_use_recommendation',
         'last_update',
         'current_address',
-        'max_km_distance'
+        'max_km_distance',
+        'noti_token'
     ];
     protected $casts = [
         'current_address' => 'array'
