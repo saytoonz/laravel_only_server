@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AppUser;
 use App\Models\Recommendation;
+use App\Models\SystemApi;
+use App\Models\SystemUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
@@ -46,7 +48,12 @@ class RecommendationController extends Controller
 
             $user = AppUser::find($request->uid);
 
+
             if ($user) {
+
+            $appleUrl = SystemUrl::find(1);
+            $googleUrl = SystemUrl::find(2);
+
                 $pronoun = "him";
                 $pronoun2 = "his";
                 if($user->gender == "Woman"){
@@ -59,8 +66,8 @@ Your friend $user->first_name $user->last_name has invited you to recommend $pro
 
 Download the app from the below link and select «Recommend» a friend to recommend $pronoun using $pronoun2 contact number $user->phone.
 
-App Store: https://testflight.apple.com/join/YX7oAjyZ
-Google Play: N/A
+App Store: ".$appleUrl->url."
+Google Play: ".$googleUrl->url."
 
 Thank you! The Only Team";
 
@@ -151,20 +158,29 @@ Thank you! The Only Team";
 
         //Send Sms here....
         if ($dbResponse) {
+            $appleUrl = SystemUrl::find(1);
+            $googleUrl = SystemUrl::find(2);
+
             $smsMessage = "You are a trusted friend $request->friend_name!
 
 Your friend $request->recommender_fname $request->recommender_sname has recommended you to join the new and innovative dating app ONLY!, where only users that have been recommended by friends are allowed to join. That way we get the best community of users! Or as we like to say - only good people. Kindly follow the link below to join.
 
 Kindly register with this SMS code: $sms_code
 
-App Store: https://testflight.apple.com/join/YX7oAjyZ
-Google Play: N/A";
+App Store: ".$appleUrl->url."
+Google Play: ".$googleUrl->url."";
 
 
 
             $response["error"] = FALSE;
             $response["msg"] = "Recommendation created successfully.";
             $response["smsResp"] = $this->sendSMS($request->friend_phone,  $smsMessage);
+            $user = AppUser::where("phone", $request->friend_phone)->get()->first();
+
+            if($user){
+                (new PushNotificationController)->SendPush($user->id, "recording");
+            }
+
         } else {
             $response["error"] = TRUE;
             //Use message from the top
@@ -339,7 +355,7 @@ Thank you,
 
 The ONLY! Team";
 
-            $last_update =
+
                 $recommended->update([
                     'active' => 'rej',
                     'date_used' => date("F j, Y, g:i a"),
@@ -382,10 +398,10 @@ The ONLY! Team";
 
     public function sendSMS($phone, $message)
     {
-
+        // $mycsmsAPI = SystemApi::find(2);
         // $apiURL = "https://apiv2.mycsms.com";
         // $postInput = [
-        //     'apiKey' => 'cSMS76b8512f69953562-d7c386f5bdb710ee',
+        //     'apiKey' => $mycsmsAPI->api,
         //     'phone' => [$phone],
         //     'sender' => 'ONLY',
         //     'message' => $message,
@@ -397,6 +413,7 @@ The ONLY! Team";
         // $responseBody = json_decode($resp->getBody(), true);
 
 
+        $arkaselAPI = SystemApi::find(3);
         $apiURL = "https://sms.arkesel.com/api/v2/sms/send";
         $postInput = [
 
@@ -405,7 +422,7 @@ The ONLY! Team";
             'message' => $message,
         ];
 
-        $headers = ['api-key' => 'ZkRxc1NKVnFmRlZicFVhRVRka20'];
+        $headers = ['api-key' => $arkaselAPI->api];
 
         $resp = Http::withHeaders($headers)->post($apiURL, $postInput);
         // $statusCode = $response->status();
