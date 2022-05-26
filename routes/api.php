@@ -7,6 +7,7 @@ use App\Http\Controllers\AppUserController;
 use App\Http\Controllers\AppUserReportsController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MatchesController;
+use App\Http\Controllers\PushNotificationController;
 use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserAboutController;
@@ -122,6 +123,9 @@ Route::post('appuser-report', [AppUserReportsController::class, 'store']);
 
 //File Uploader route
 Route::post('upload-file', [UploadFileController::class, 'saveFile']);
+
+//Send push
+Route::get('send-push-notification/{uid}/{type}', [PushNotificationController::class, 'SendPush']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
