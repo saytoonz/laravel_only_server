@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
 {
+
+
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -65,6 +68,8 @@ class ChatController extends Controller
                 );
                 $chatListItem->unread = $chatListItem->unread + 1;
                 $chatListItem->save();
+
+               (new PushNotificationController)->SendPush(request('to'), "chat");
             }
             return response()->json([
                 'error' => false,
