@@ -46,6 +46,7 @@ class UserLikesController extends Controller
                     'isliked' => $request->isliked,
                 ]
             );
+            (new PushNotificationController)->SendPush(request('to'), "like");
             if ($userLike) {
                 $userLikedMe = UserLikes::where('from', $request->to)->where('to', $request->from)->first();
 
@@ -62,6 +63,7 @@ class UserLikesController extends Controller
                                 'user2' => $request->from,
                             ]
                         );
+                    (new PushNotificationController)->SendPush(request('to'), "match");
                     }
                 }
 
