@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppUser;
+use App\Models\Notification;
 use App\Models\Recommendation;
 use App\Models\SystemApi;
 use App\Models\SystemUrl;
@@ -51,14 +52,14 @@ class RecommendationController extends Controller
 
             if ($user) {
 
-            $appleUrl = SystemUrl::find(1);
-            $googleUrl = SystemUrl::find(2);
+                $appleUrl = SystemUrl::find(1);
+                $googleUrl = SystemUrl::find(2);
 
                 $pronoun = "him";
                 $pronoun2 = "his";
-                if($user->gender == "Woman"){
-                   $pronoun = "her";
-                   $pronoun2 = "her";
+                if ($user->gender == "Woman") {
+                    $pronoun = "her";
+                    $pronoun2 = "her";
                 }
                 $smsMessage = "Oh Yes! $request->first_name.
 
@@ -66,8 +67,8 @@ Your friend $user->first_name $user->last_name has invited you to recommend $pro
 
 Download the app from the below link and select «Recommend» a friend to recommend $pronoun using $pronoun2 contact number $user->phone.
 
-App Store: ".$appleUrl->url."
-Google Play: ".$googleUrl->url."
+App Store: " . $appleUrl->url . "
+Google Play: " . $googleUrl->url . "
 
 Thank you! The Only Team";
 
@@ -167,8 +168,8 @@ Your friend $request->recommender_fname $request->recommender_sname has recommen
 
 Kindly register with this SMS code: $sms_code
 
-App Store: ".$appleUrl->url."
-Google Play: ".$googleUrl->url."";
+App Store: " . $appleUrl->url . "
+Google Play: " . $googleUrl->url . "";
 
 
 
@@ -177,10 +178,12 @@ Google Play: ".$googleUrl->url."";
             $response["smsResp"] = $this->sendSMS($request->friend_phone,  $smsMessage);
             $user = AppUser::where("phone", $request->friend_phone)->get()->first();
 
-            if($user){
-                (new PushNotificationController)->SendPush($user->id, "recording");
+            if ($user) {
+                $notifs = Notification::where("uid", $user->id)->get()->first();
+                if ($notifs && $notifs->push_friend_recording == 1) {
+                    (new PushNotificationController)->SendPush($user->id, "recording");
+                }
             }
-
         } else {
             $response["error"] = TRUE;
             //Use message from the top
@@ -356,10 +359,10 @@ Thank you,
 The ONLY! Team";
 
 
-                $recommended->update([
-                    'active' => 'rej',
-                    'date_used' => date("F j, Y, g:i a"),
-                ]);
+            $recommended->update([
+                'active' => 'rej',
+                'date_used' => date("F j, Y, g:i a"),
+            ]);
             $response["error"] = FALSE;
             $response["msg"] = "done";
             $response["smsResp"] = $this->sendSMS($recommended->recommender_phone,  $smsMessage);
