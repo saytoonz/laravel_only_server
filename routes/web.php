@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\AdminController;
 use App\Http\Controllers\backend\HomeController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +49,10 @@ Route::get('/user-matches/{id}', [AdminController::class, 'userMatches'])->middl
 Route::get('update-api/{tbl}/{id}/{field}/{value}', [AdminController::class, 'updateWithApi'])->middleware(['auth'])->name("update");
 
 Route::get('logout', [HomeController::class, 'logout']);
+
+Route::get('sendbasicemail', [MailController::class, "basic_email"]);
+Route::get('sendhtmlemail',[MailController::class, "html_email"]);
+Route::get('sendattachmentemail', [MailController::class, "attachment_email"]);
+
 
 require __DIR__.'/auth.php';
