@@ -7,6 +7,7 @@ use App\Models\AppUser;
 use App\Models\Chat;
 use App\Models\ChatList;
 use App\Models\Matches;
+use App\Models\Notification;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -69,7 +70,10 @@ class ChatController extends Controller
                 $chatListItem->unread = $chatListItem->unread + 1;
                 $chatListItem->save();
 
-               (new PushNotificationController)->SendPush(request('to'), "chat");
+                $notifs = Notification::where("uid", request('to'))->get()->first();
+                if ($notifs && $notifs->push_messages == 1) {
+                    (new PushNotificationController)->SendPush(request('to'), "chat");
+                }
             }
             return response()->json([
                 'error' => false,
@@ -131,18 +135,18 @@ class ChatController extends Controller
                 ->paginate($quantity);
 
             $list = ChatList::where('owner', $uid)->where('from', $withId)->orwhere('to', $withId)->get()->first();
-             if($list){
+            if ($list) {
                 $list->unread = 0;
                 $list->save();
             }
 
-                for ($i=0; $i < count($chats); $i++) {
-                    $chat = $chats[$i];
-                    if($chat->status != "SEEN" && $chat->from != $uid){
-                        $chat->status = "SEEN";
-                        $chat->save();
-                    }
+            for ($i = 0; $i < count($chats); $i++) {
+                $chat = $chats[$i];
+                if ($chat->status != "SEEN" && $chat->from != $uid) {
+                    $chat->status = "SEEN";
+                    $chat->save();
                 }
+            }
 
             $response["message"] = "success";
             $response["data"] = $chats;
@@ -157,42 +161,42 @@ class ChatController extends Controller
 
 
 
-public function getNewChats($uid, $withId, $lastId)
-{
-    $response = array("error" => FALSE);
-    try {
-        $chats = Chat::where('id', '>', $lastId)->where(function ($query) use ($uid, $withId) {
-            $query->where('from', $uid);
-            $query->orwhere('from', $withId);
-        })->where(function ($query) use ($uid, $withId) {
-            $query->where('to', $uid);
-            $query->orwhere('to', $withId);
-        })->orderBy('id', 'DESC')
-            ->paginate(100);
+    public function getNewChats($uid, $withId, $lastId)
+    {
+        $response = array("error" => FALSE);
+        try {
+            $chats = Chat::where('id', '>', $lastId)->where(function ($query) use ($uid, $withId) {
+                $query->where('from', $uid);
+                $query->orwhere('from', $withId);
+            })->where(function ($query) use ($uid, $withId) {
+                $query->where('to', $uid);
+                $query->orwhere('to', $withId);
+            })->orderBy('id', 'DESC')
+                ->paginate(100);
 
             $list = ChatList::where('owner', $uid)->where('from', $withId)->orwhere('to', $withId)->get()->first();
-            if($list){
+            if ($list) {
                 $list->unread = 0;
                 $list->save();
             }
 
 
-            for ($i=0; $i < count($chats); $i++) {
+            for ($i = 0; $i < count($chats); $i++) {
                 $chat = $chats[$i];
-                if($chat->status != "SEEN" && $chat->from != $uid){
+                if ($chat->status != "SEEN" && $chat->from != $uid) {
                     $chat->status = "SEEN";
                     $chat->save();
                 }
             }
 
-        $response["message"] = "success";
-        $response["data"] = $chats;
-        $response["error"] = false;
-    } catch (\Throwable $th) {
-        // throw $th;
-        $response["error"] = true;
-        $response["message"] = "Server error!";
+            $response["message"] = "success";
+            $response["data"] = $chats;
+            $response["error"] = false;
+        } catch (\Throwable $th) {
+            // throw $th;
+            $response["error"] = true;
+            $response["message"] = "Server error!";
+        }
+        return json_encode($response);
     }
-    return json_encode($response);
-}
 }
