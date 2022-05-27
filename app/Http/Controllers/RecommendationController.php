@@ -416,7 +416,6 @@ The ONLY! Team";
         $arkaselAPI = SystemApi::find(3);
         $apiURL = "https://sms.arkesel.com/api/v2/sms/send";
         $postInput = [
-
             'recipients' => [$phone],
             'sender' => 'ONLY',
             'message' => $message,
