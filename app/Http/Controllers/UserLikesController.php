@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Matches;
+use App\Models\Notification;
 use App\Models\UserLikes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -46,7 +47,11 @@ class UserLikesController extends Controller
                     'isliked' => $request->isliked,
                 ]
             );
-            (new PushNotificationController)->SendPush(request('to'), "like");
+
+            $notifs = Notification::where("uid", request('to'))->get()->first();
+            if ($notifs && $notifs->mail_new_mach == 1) {
+                (new PushNotificationController)->SendPush(request('to'), "like");
+            }
             if ($userLike) {
                 $userLikedMe = UserLikes::where('from', $request->to)->where('to', $request->from)->first();
 
@@ -63,7 +68,12 @@ class UserLikesController extends Controller
                                 'user2' => $request->from,
                             ]
                         );
-                    (new PushNotificationController)->SendPush(request('to'), "match");
+
+
+                        $notifs = Notification::where("uid", request('to'))->get()->first();
+                        if ($notifs && $notifs->mail_new_mach == 1) {
+                            (new PushNotificationController)->SendPush(request('to'), "match");
+                        }
                     }
                 }
 
