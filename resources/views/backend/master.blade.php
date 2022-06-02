@@ -26,12 +26,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="{{ url('css/cs-skin-elastic.css') }}">
     <link rel="stylesheet" href="{{ url('css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url('css/lib/chosen/chosen.min.css') }}">
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
     <style>
         #weatherWidget .currentDesc {
             color: #ffffff !important;
@@ -126,9 +131,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
-    <script src="{{ url('js/init/fullcalendar-init.js') }}"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ url('js/init/fullcalendar-init.js') }}"></script>
+    <script src="{{ url('js/lib/chosen/chosen.jquery.min.js') }}"></script>
+
 
 
 
@@ -330,7 +337,16 @@
             });
             // Bar Chart #flotBarChart End
         });
-    </script>
+
+
+    jQuery(document).ready(function() {
+        jQuery(".standardSelect").chosen({
+            disable_search_threshold: 10,
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+    });
+</script>
 </body>
 
 </html>
