@@ -29,6 +29,8 @@ Route::get('/newVerification',[AdminController::class, "newVerification"])->midd
 Route::get('/verified',[AdminController::class, "verified"])->middleware(['auth'])->name('verification');
 Route::get('/verification-rejected',[AdminController::class, "verificationRejected"])->middleware(['auth'])->name('verification');
 
+Route::get('send-push', [AdminController::class, "sendPush"])->middleware(['auth'])->name('notifications');
+
 Route::get('/new-users', [AdminController::class, 'newUsers'])->middleware(['auth'])->name("users");
 Route::get('/all-users', [AdminController::class, 'allUsers'])->middleware(['auth'])->name("users");
 Route::get('/blocked-users', [AdminController::class, 'blockedUsers'])->middleware(['auth'])->name("users");
