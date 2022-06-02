@@ -332,4 +332,10 @@ class AdminController extends Controller
     }
 
 
+    public function sendPush()
+    {
+        return view('backend.notification.send-push',[]);
+    }
+
+
 }
