@@ -31,6 +31,24 @@
 
 
 
+                <li class="menu-title">Notifications</li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i class="menu-icon fa fa-sign-out"></i>Push</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-floppy-o"></i><a href="{{url('push-template')}}">Templates</a></li>
+                        <li><i class="fa fa-sign-out"></i><a href="{{url('send-push')}}">Send Notification</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item-has-children dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Email</a>
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa ti-email"></i><a href="{{url('new-likes')}}">Send Email</a></li>
+                    </ul>
+                </li>
+
+
                 <li class="menu-title">Activities</li>
                 <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
@@ -53,7 +71,7 @@
 
                 <li class="menu-title">Reports </li><!-- /.menu-title -->
                 <li>
-                    <a href="{{url("reports")}}"> <i class="menu-icon ti-email"></i>User Report </a>
+                    <a href="{{url("reports")}}"> <i class="menu-icon  fa-comment-o fa"></i>User Report </a>
                 </li>
 {{--
                 <li class="menu-title">UI elements</li><!-- /.menu-title -->
