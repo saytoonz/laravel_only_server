@@ -54,6 +54,7 @@ class RecommendationController extends Controller
 
                 $appleUrl = SystemUrl::find(1);
                 $googleUrl = SystemUrl::find(2);
+                $oneLinkUrl = SystemUrl::find(3);
 
                 $pronoun = "him";
                 $pronoun2 = "his";
@@ -161,6 +162,7 @@ Thank you! The Only Team";
         if ($dbResponse) {
             $appleUrl = SystemUrl::find(1);
             $googleUrl = SystemUrl::find(2);
+            $oneLinkUrl = SystemUrl::find(3);
 
             $smsMessage = "You are a trusted friend $request->friend_name!
 
