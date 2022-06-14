@@ -334,7 +334,16 @@ class AdminController extends Controller
 
     public function sendPush()
     {
-        return view('backend.notification.send-push',[]);
+        $countries = DB::table('app_users')->select(DB::raw('DISTINCT country, COUNT(*) AS counts'))->groupBy('country')->orderBy('counts', 'desc')->get();
+        $users = DB::table('app_users')->get();
+
+        return view(
+            'backend.notification.send-push',
+            [
+                "countries" => $countries,
+                "users" => $users
+            ]
+        );
     }
 
 
