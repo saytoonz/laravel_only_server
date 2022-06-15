@@ -347,4 +347,12 @@ class AdminController extends Controller
     }
 
 
+    public function pushTemplate()
+    {
+        return view('backend.notification.push-templates',[
+        'users' => []
+        ]);
+    }
+
+
 }
