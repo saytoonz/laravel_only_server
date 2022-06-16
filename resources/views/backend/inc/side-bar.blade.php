@@ -36,17 +36,17 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa fa-sign-out"></i>Push</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa fa-floppy-o"></i><a href="{{url('push-template')}}">Templates</a></li>
+                        {{-- <li><i class="fa fa-floppy-o"></i><a href="{{url('push-template')}}">Templates</a></li> --}}
                         <li><i class="fa fa-sign-out"></i><a href="{{url('send-push')}}">Send Notification</a></li>
                     </ul>
                 </li>
-                <li class="menu-item-has-children dropdown">
+                {{-- <li class="menu-item-has-children dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Email</a>
                     <ul class="sub-menu children dropdown-menu">
                         <li><i class="fa ti-email"></i><a href="{{url('send-mail')}}">Send Email</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
 
                 <li class="menu-title">Activities</li>
