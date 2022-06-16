@@ -32,6 +32,7 @@ Route::get('/verified',[AdminController::class, "verified"])->middleware(['auth'
 Route::get('/verification-rejected',[AdminController::class, "verificationRejected"])->middleware(['auth'])->name('verification');
 
 Route::get('send-push', [AdminController::class, "sendPush"])->middleware(['auth'])->name('notifications');
+Route::get('send-mail', [AdminController::class, "sendEmail"])->middleware(['auth'])->name('notifications');
 
 Route::get('/new-users', [AdminController::class, 'newUsers'])->middleware(['auth'])->name("users");
 Route::get('/all-users', [AdminController::class, 'allUsers'])->middleware(['auth'])->name("users");
@@ -56,12 +57,15 @@ Route::get('logout', [HomeController::class, 'logout']);
 
 
 
-
-
+//* Web APIs
 //!Send push notifications
 Route::get("push-template", [AdminController::class, 'pushTemplate'])->middleware(['auth'])->name("push");
 Route::post('send-push-user', [CrudController::class, "sendPushToUser"])->middleware(['auth'])->name("push");
 Route::post('country-push-user', [CrudController::class, "sendPushToCountry"])->middleware(['auth'])->name("push");
+
+//!Send Email
+Route::post('send-mail-user', [CrudController::class, "sendMailToUser"])->middleware(['auth'])->name("mail");
+Route::post('country-mail-user', [CrudController::class, "sendPushToCountry"])->middleware(['auth'])->name("mail");
 
 
 //! Email notifications
