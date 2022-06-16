@@ -354,5 +354,19 @@ class AdminController extends Controller
         ]);
     }
 
+    public function sendEmail()
+    {
+        $countries = DB::table('app_users')->select(DB::raw('DISTINCT country, COUNT(*) AS counts'))->groupBy('country')->orderBy('counts', 'desc')->get();
+        $users = DB::table('app_users')->get();
+
+        return view(
+            'backend.notification.send-email',
+            [
+                "countries" => $countries,
+                "users" => $users
+            ]
+        );
+    }
+
 
 }
