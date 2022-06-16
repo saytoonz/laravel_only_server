@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PushNotificationController;
 use App\Models\AppUser;
 use Illuminate\Http\Request;
@@ -74,6 +75,50 @@ class CrudController extends Controller
         $request->session()->flash('message-2', "Notification sent to all users from " . $request->country . " successfully");
         return redirect()->back();
     }
+
+
+
+
+
+
+    public function sendMailToUser(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'user_id' => 'required',
+            'title' => 'required',
+            'notification' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $request->session()->flash('error', "Required parameter missing.");
+            return redirect()->back();
+        }
+
+        $user = AppUser::find($request->user_id);
+        if (!$user) {
+            $request->session()->flash('error', "Unknown user.");
+            return redirect()->back();
+        }
+
+        $message = Str::replaceArray('{username}', ['' . $user->first_name . ''], $request->notification);
+        $request->notification = $message;
+
+        $this->insertData($request);
+        if($user->noti_token){
+            try {
+                (new MailController)->html_email();
+                // (new MailController)->triggerPush($user->email, $request->title, $message);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+
+        $request->session()->flash('message', "Notification sent to " . $user->first_name . " successfully");
+        return redirect()->back();
+    }
+
+
+
 
 
 
