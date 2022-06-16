@@ -44,7 +44,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false"> <i class="menu-icon fa fa-envelope"></i>Email</a>
                     <ul class="sub-menu children dropdown-menu">
-                        <li><i class="fa ti-email"></i><a href="{{url('new-likes')}}">Send Email</a></li>
+                        <li><i class="fa ti-email"></i><a href="{{url('send-mail')}}">Send Email</a></li>
                     </ul>
                 </li>
 
