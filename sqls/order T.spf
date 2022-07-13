@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>colorIndex</key>
+			<integer>0</integer>
+			<key>database</key>
+			<string>bedbkzttbm</string>
+			<key>host</key>
+			<string>127.0.0.1</string>
+			<key>kcid</key>
+			<string>-8213848157421461875</string>
+			<key>name</key>
+			<string>NM Dashboard</string>
+			<key>port</key>
+			<integer>3306</integer>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>ssh_host</key>
+			<string>165.227.237.55</string>
+			<key>ssh_keyLocation</key>
+			<string></string>
+			<key>ssh_keyLocationEnabled</key>
+			<integer>0</integer>
+			<key>ssh_user</key>
+			<string>sayt</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPSSHTunnelConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>bedbkzttbm</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0
+			b3BYJG9iamVjdHMSAAGGoF8QD05TS2V5ZWRBcmNoaXZlctEICVRk
+			YXRhgAGoCwwXGBkaHiVVJG51bGzTDQ4PEBMWV05TLmtleXNaTlMu
+			b2JqZWN0c1YkY2xhc3OiERKAAoADohQVgASABYAHVHR5cGVUcm93
+			c18QHVNlbGVjdGlvbkRldGFpbFR5cGVOU0luZGV4U2V00hsPHB1c
+			TlNSYW5nZUNvdW50EACABtIfICEiWiRjbGFzc25hbWVYJGNsYXNz
+			ZXNaTlNJbmRleFNldKIjJFpOU0luZGV4U2V0WE5TT2JqZWN00h8g
+			JidcTlNEaWN0aW9uYXJ5oiYoWE5TT2JqZWN0AAgAEQAaACQAKQAy
+			ADcASQBMAFEAUwBcAGIAaQBxAHwAgwCGAIgAigCNAI8AkQCTAJgA
+			nQC9AMIAzwDRANMA2ADjAOwA9wD6AQUBDgETASABIwAAAAAAAAIB
+			AAAAAAAAACkAAAAAAAAAAAAAAAAAAAEs
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {694, 444}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendors_orders WHERE payment_status = 3 AND delivery_status = 5 AND DATE(`created_at`) !=2022 AND MONTH(created_at) !=7 GROUP BY customer_id HAVING order_total =1 ORDER BY order_total DESC</string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>214</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendors_orders WHERE payment_status = 3 AND delivery_status = 5 GROUP BY customer_id HAVING order_total =1 ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendors_orders WHERE payment_status = 3 AND delivery_status = 5 HAVING order_total =1 GROUP BY customer_id ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendors_orders WHERE payment_status = 3 AND delivery_status = 5  AND HAVING order_total =1 GROUP BY customer_id ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendors_orders WHERE payment_status = 3 AND delivery_status = 5  AND order_total =1 GROUP BY customer_id ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendors_orders WHERE payment_status = 3 AND delivery_status = 5 GROUP BY customer_id ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_phone, customer_email, COUNT(id) AS order_total FROM vendor_orders WHERE payment_status = 3 AND delivery_status = 5 GROUP BY customer_id ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_phone, customer_email COUNT(id) AS order_total FROM vendor_orders WHERE payment_status = 3 AND delivery_status = 5 GROUP BY customer_id ORDER BY order_total DESC</string>
+		<string>SELECT customer_name, customer_email, customer_phone, count(id) AS order_t FROM `vendors_orders` where payment_status = 3 AND delivery_status = 5 GROUP BY customer_id ORDER BY order_t DESC</string>
+		<string>SELECT customer_name, customer_email, count(id) AS order_t FROM `vendors_orders` where payment_status = 3 AND delivery_status = 5 GROUP BY customer_id ORDER BY order_t DESC</string>
+		<string>SELECT customer_name, count(id) AS order_t FROM `vendors_orders` where payment_status = 3 AND delivery_status = 5 GROUP BY customer_id ORDER BY order_t DESC</string>
+		<string>SELECT customer_name, count(id) AS order_t FROM `vendors_orders` where payment_status = 3 GROUP BY customer_id ORDER BY order_t DESC</string>
+		<string>SELECT customer_name, count(id) AS order_t FROM `vendors_orders` where payment_status = 3 ORDER BY order_t DESC GROUP BY customer_id</string>
+		<string>SELECT customer_name, count(id) FROM `vendors_orders` GROUP BY customer_id</string>
+		<string>UPDATE delivery_locations SET delivery_fee = 2 WHERE delivery_fee &lt; 2</string>
+		<string>INSERT INTO `delivery_mappings` ( `pickup_id`, `delivery_location_id`, `delivery_fee`, `processing_fee`, `created_at`, `updated_at`, `status`, `campus`)
+VALUES
+	(1, 83, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(1, 84, 3, 1, '2022-05-29 08:21:44', '2022-07-04 10:19:37', 1, 'University of Ghana'),
+	(1, 85, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:45', 1, 'University of Ghana'),
+	(1, 86, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(1, 87, 3, 1, '2022-05-29 08:21:44', '2022-07-04 10:09:47', 1, 'University of Ghana'),
+	(1, 88, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(2, 83, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(2, 84, 3, 1, '2022-05-29 08:21:44', '2022-07-04 10:19:37', 1, 'University of Ghana'),
+	(2, 85, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:45', 1, 'University of Ghana'),
+	(2, 86, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(2, 87, 3, 1, '2022-05-29 08:21:44', '2022-07-04 10:09:47', 1, 'University of Ghana'),
+	(2, 88, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(3, 83, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(3, 84, 3, 1, '2022-05-29 08:21:44', '2022-07-04 10:19:37', 1, 'University of Ghana'),
+	(3, 85, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:45', 1, 'University of Ghana'),
+	(3, 86, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana'),
+	(3, 87, 3, 1, '2022-05-29 08:21:44', '2022-07-04 10:09:47', 1, 'University of Ghana'),
+	(3, 88, 4, 1, '2022-05-29 08:21:44', '2022-06-25 17:30:02', 1, 'University of Ghana')</string>
+		<string>SELECT * FROM delivery_mappings dm LEFT JOIN delivery_locations dl ON dl.id = dm.`delivery_location_id`</string>
+		<string>SELECT * FROM delivery_mappings dm LEFT JOIN delivery_locations ON dl.id = dm.`delivery_location_id`</string>
+		<string>UPDATE delivery_locations SET status = 1</string>
+		<string>SELECT *, COUNT(food_order_number) as c FROM trips having c &gt; 1;
+SELECT  *
+FROM trips
+GROUP BY food_order_number
+HAVING COUNT(id) &gt;1</string>
+		<string>SELECT *, COUNT(food_order_number) as c FROM trips having c &gt; 1;
+SELECT  *
+FROM trips
+GROUP BY food_order_number
+HAVING COUNT(id) &gt;2</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.5-10.4.20-MariaDB-1:10.4.20+maria~stretch-log</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
