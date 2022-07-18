@@ -61,7 +61,7 @@ class AppUserController extends Controller
 
         return UserResource::collection(
             AppUser::whereIn('id', $myLikes)
-                ->inRandomOrder()->paginate(1)
+                ->inRandomOrder()->paginate(100)
         );
     }
 
